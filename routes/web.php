@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Livewire\admin\UserController;
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,6 +9,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::view('about', 'about')->name('about');
+
+Route::prefix('admin')
+    ->middleware('auth', 'role:admin')
+    ->group(function () {
+        Route::get('/users', UserController::class)->name('admin.users.index');
+    });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
