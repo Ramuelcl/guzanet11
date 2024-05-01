@@ -4,6 +4,7 @@
 return [
     'clave' => 'valor',
     'aplicacion' => 'Guzanet',
+    'idioma' => 'es-CL',
 ];
 
 /**
