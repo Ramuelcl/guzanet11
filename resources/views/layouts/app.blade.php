@@ -17,9 +17,12 @@
 
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   @livewireStyles
+  {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script> --}}
+
 </head>
 
-<body wire:poll.15s>
+<body>
   <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-slate-200 font-roboto">
     @include('layouts.navigation')
 
@@ -42,7 +45,8 @@
   </div>
   {{-- <script src="{{ 'resources/js/init-alpine.js' }}"></script> --}}
   <script rel="script" type="text/javascript" src="resources/js/mod-dark.js"></script>
-
+  {{-- @push('modals')
+  @endpush --}}
   @livewireScripts
 </body>
 

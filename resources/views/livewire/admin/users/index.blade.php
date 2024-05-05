@@ -1,5 +1,5 @@
 <!-- resources/views/livewire/admin/users/index.blade.php -->
-<x-app-layout>
+<div>
   <x-slot name="header">
     {{ __('List Users') }}
   </x-slot>
@@ -12,7 +12,14 @@
             <div class="md:w-4/5 pr-4 pl-4">{{ Session::get('success') }}</div>
           </div>
         @endif
-        <a class="w-full" routeName="users.create">{{ __('Create New') }}</a>
+        <button id="name" type="button" wire:click="fncVerCrearEditarEliminar(0, 'crear')"
+          class="bg-blue-500 text-gray-100 w-full rounded-lg">
+          Nuevo
+        </button>
+
+        <x-forms.tw_button wire:click="fncVerCrearEditarEliminar(null, 'crear')" class="w-full"
+          color="blue">{{ __('New') }}
+        </x-forms.tw_button>
         <table class="table-auto w-full" wire:poll.3000ms>
           <thead>
             <tr>
@@ -21,38 +28,38 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($usuario as $field)
+            @foreach ($fields as $field)
               <tr>
                 @include('includes.campos')
 
                 <td class="border px-4 py-1 text-center">
 
                   {{-- ver un registro --}}
-                  <x-forms.tw_buttonA color="gray" icon='eye'>{{ __('view') }}</x-forms.tw_buttonA>
+                  <x-forms.tw_button color="gray" icon='eye' class="" name="ver"
+                    ejecuta="fncVerCrearEditarEliminar($field->id, 'ver')">
+                  </x-forms.tw_button>
 
                   {{-- editar un registro --}}
-                  <a href="{{ route('users.edit', $field->id) }}"
-                    class="inline-flex items-center justify-center min-w-20 rounded-md p-2 focus:outline-none focus:ring bg-green-600 dark:bg-green-400 text-green-100 dark:text-green-800 hover:bg-green-400 dark:hover:bg-green-200 active:bg-green-400 dark:active:bg-green-200 focus:ring-green-700 dark:focus:ring-green-500">{{ __('Edit') }}
-                  </a>
+                  <x-forms.tw_button wire:click="fncVerCrearEditarEliminar($field->id, 'editar')"
+                    color="green">{{ __('Edit') }}
+                  </x-forms.tw_button>
 
                   {{-- borrar un registro --}}
-                  <div class="inline-flex items-center justify-center">
-                    <form action="{{ route('users.destroy', $field->id) }}" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <x-forms.tw_button type="submit" color="red">Eliminar</x-forms.tw_button>
-                    </form>
-                  </div>
-
+                  <x-forms.tw_button wire:click="fncVerCrearEditarEliminar($field->id, 'eliminar')"
+                    color="red">{{ __('Delete') }}
+                  </x-forms.tw_button>
                   {{-- roles --}}
-                  <x-forms.tw_buttonA color="violet">{{ __('Role') }}</x-forms.tw_buttonA>
-                  <x-forms.tw_buttonA color="yellow">{{ __('Permissions') }}</x-forms.tw_buttonA>
+                  <x-forms.tw_button wire:click="fncRoles($field->id)" color="violet">{{ __('Role') }}
+                  </x-forms.tw_button>
+                  {{-- <x-forms.tw_button wire:click="fncPermisos($field->id)" color="yellow">{{ __('Permission') }}
+                  </x-forms.tw_button> --}}
                 </td>
               </tr>
             @endforeach
           </tbody>
         </table>
+        {{ $fields->links() }}
       </div>
     </div>
   </div>
-</x-app-layout>
+</div>
