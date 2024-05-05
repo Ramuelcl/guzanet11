@@ -9,17 +9,18 @@ use App\Models\post\Post;
 
 class Formulario extends Component
 {
-    public $categories, $tags;
+    public $categories;
+    public $tags;
 
     public function mount()
     {
-        $this->categories = Category::all();
-        dd($this->categories);
-        $this->tags = Tag::all();
     }
 
     public function render()
     {
+        $this->categories = Category::all();
+        dd($this->categories);
+        $this->tags = Tag::all();
         return view('livewire.formulario', ['categories' => $this->categories, 'tags' => $this->tags]);
     }
 }

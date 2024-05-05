@@ -7,7 +7,9 @@
     <div class="border-b border-gray-200 p-6">
 
       @livewire('forms.formulario')
-      <br> @php
+
+      <br>
+      @php
         $opciones = [
             ['id' => 1, 'name' => 'uno'],
             ['id' => 2, 'name' => 'dos'],
