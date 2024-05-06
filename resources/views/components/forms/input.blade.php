@@ -1,17 +1,19 @@
-@props(['disabled' => false, 'type' => 'text', 'title' => null, 'id' => null, 'value' => null])
-@if ($title)
-  <x-forms.label class="ml-4 text-base font-semibold">{{ $title }}</x-forms.label>
+@props(['disabled' => false, 'type' => 'text', 'label' => null, 'id' => null, 'value' => null])
+@if ($label)
+  <x-forms.label class="ml-4">{{ $label }}</x-forms.label>
 @endif
 @if ($type == 'textarea')
   <textarea {{ $disabled ? 'disabled' : '' }}
             {!! $attributes->merge([
-                'class' => 'block mt-1 w-full rounded-md form-input border-blue-400 focus:border-blue-600',
+                'class' =>
+                    'font-normal text-blue-500 dark:text-blue-100 block mt-1 w-full rounded-md form-input border-blue-400 focus:border-blue-600',
             ]) !!}>{{ $slot }}</textarea>
 @else
   <input type=="$type"
          {{ $disabled ? 'disabled' : '' }}
          {!! $attributes->merge([
-             'class' => 'block mt-1 w-full rounded-md form-input border-blue-400 focus:border-blue-600',
+             'class' =>
+                 'font-normal text-blue-500 dark:text-blue-100 block mt-1 w-full rounded-md form-input border-blue-400 focus:border-blue-600',
          ]) !!} />
 @endif
 @error($id)
