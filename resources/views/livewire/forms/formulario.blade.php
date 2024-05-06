@@ -13,7 +13,7 @@
         <x-forms.label class="ml-4">Categoria</x-forms.label>
         <select
           class="form-input mt-1 block w-full rounded-md border-blue-400 font-normal text-blue-500 focus:border-blue-600 dark:text-blue-500"
-          wire:model="categoryId">
+          required wire:model="categoryId">
           <option disabled value="">Seleccione</option>
           @foreach ($categories as $category)
             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -25,8 +25,8 @@
         <ul>
           @foreach ($tags as $tag)
             <li>
-              <x-forms.checkbox value="{{ $tag->id }}"
-                wire:model="selectedTags">{{ $tag->name }}</x-forms.checkbox>
+              <x-forms.checkbox id="{{ $tag->id }}" title="{{ $tag->name }}" value="{{ $tag->id }}"
+                wire:model="selectedTags"></x-forms.checkbox>
             </li>
           @endforeach
         </ul>

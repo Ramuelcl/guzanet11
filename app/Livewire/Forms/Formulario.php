@@ -22,9 +22,10 @@ class Formulario extends Component
         $is_published = false,
         $categoryId = '',
         $selectedTags = [];
+
     public function mount()
     {
-        $this->Accion = 'crear';
+        $this->accion = 'crear';
     }
 
     public function render()
@@ -35,7 +36,7 @@ class Formulario extends Component
         return view('livewire.forms.formulario', ['categories' => $this->categories, 'tags' => $this->tags]);
     }
 
-    public function fncAccion($accion)
+    public function fncAccion($accion = null)
     {
         dd([
             'accion' => $this->accion,
