@@ -20,7 +20,7 @@ class Post extends Model
     }
 
     // relacion n-n inversa
-    public function tags(): BelongsToMany
+    public function tags()
     {
         return $this->belongsToMany(Tag::class);
     }

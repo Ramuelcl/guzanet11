@@ -38,16 +38,25 @@ class Formulario extends Component
 
     public function fncAccion($accion = null)
     {
-        dd([
-            'accion' => $this->accion,
+        // dd([
+        //     'accion' => $this->accion,
+        //     'title' => $this->title,
+        //     'slug' => Str::slug($this->title),
+        //     'content' => $this->content,
+        //     'image_path' => $this->image_path,
+        //     'is_published' => $this->is_published,
+        //     'categoryId' => $this->categoryId,
+        //     'selectedTags' => $this->selectedTags,
+        // ]);
+        $post = Post::updateOrCreate([
             'title' => $this->title,
             'slug' => Str::slug($this->title),
             'content' => $this->content,
             'image_path' => $this->image_path,
             'is_published' => $this->is_published,
-            'categoryId' => $this->categoryId,
-            'selectedTags' => $this->selectedTags,
+            'category_id' => $this->categoryId,
         ]);
+        $post->tags()->attach($this->selectedTags);
         // $this->slug = Str::slug($this->title);
     }
 }

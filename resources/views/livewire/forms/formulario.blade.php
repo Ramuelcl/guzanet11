@@ -24,7 +24,7 @@
         <x-forms.label class="ml-4">Marcas</x-forms.label>
         <ul>
           @foreach ($tags as $tag)
-            <li>
+            <li class="ml-4">
               <x-forms.checkbox id="{{ $tag->id }}" title="{{ $tag->name }}" value="{{ $tag->id }}"
                 wire:model="selectedTags"></x-forms.checkbox>
             </li>
