@@ -1,20 +1,20 @@
 <div>
   <div class="m-0 rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
 
-    <form action="">
+    <form wire:submit="fncAccion({{ $accion == 'crear' ? null : $item_id }})">
       @csrf
       <div class="mb-4">
-        <x-forms.input label="Título" />
+        <x-forms.input label="Título" required wire:model="title" />{{ $item_id }}
       </div>
       <div class="mb-4">
-        <x-forms.input type="textarea"
-                       label="Descripción"></x-forms.input>
+        <x-forms.input label="Descripción" required type="textarea" wire:model="content"></x-forms.input>
       </div>
       <div class="mb-4">
-        <x-forms.label class="ml-4">Categorias</x-forms.label>
+        <x-forms.label class="ml-4">Categoria</x-forms.label>
         <select
-                class="form-input mt-1 block w-full rounded-md border-blue-400 font-normal text-blue-500 focus:border-blue-600 dark:text-blue-500">
-          <option value="0">Seleccione</option>
+          class="form-input mt-1 block w-full rounded-md border-blue-400 font-normal text-blue-500 focus:border-blue-600 dark:text-blue-500"
+          wire:model="categoryId">
+          <option disabled value="">Seleccione</option>
           @foreach ($categories as $category)
             <option value="{{ $category->id }}">{{ $category->name }}</option>
           @endforeach
@@ -25,8 +25,8 @@
         <ul>
           @foreach ($tags as $tag)
             <li>
-              <x-forms.checkbox name="tags[]"
-                                value="{{ $tag->id }}">{{ $tag->name }}</x-forms.checkbox>
+              <x-forms.checkbox value="{{ $tag->id }}"
+                wire:model="selectedTags">{{ $tag->name }}</x-forms.checkbox>
             </li>
           @endforeach
         </ul>
