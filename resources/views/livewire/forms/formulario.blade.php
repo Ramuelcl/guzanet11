@@ -47,10 +47,26 @@
     </form>
   </div>
   <div class="mt-8 rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
-    <ul class="grid list-inside list-disc gap-2 pl-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+    <ul class="grid list-inside list-disc gap-2 pl-2 sm:grid-cols-1">
       @foreach ($filas as $item)
-        <li>{{ $item->title }}</li>
+        <li class="flex justify-between space-y-2">{{ $item->title }}
+          <div>
+            <button class="m-2 rounded-full bg-green-500 px-2">=</button>
+            <button class="rounded-full bg-red-500 px-2">X</button>
+          </div>
+        </li>
       @endforeach
     </ul>
   </div>
-</div>
+
+  {{-- modal --}}
+  <div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-25">
+    <div class="w-full max-w-4xl rounded-lg bg-white shadow-md sm:p-6 lg:p-8">
+      <x-forms.tw_ventana colorCuerpo="bg-blue-300"
+                          colorEncabezado="bg-blue-400"
+                          titulo="Título"
+                          pie="pie de ventana">
+        Contenido de la ventana
+      </x-forms.tw_ventana>
+    </div>
+  </div>
