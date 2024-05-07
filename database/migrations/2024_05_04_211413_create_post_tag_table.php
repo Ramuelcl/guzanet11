@@ -15,8 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('post_id')->contrained()->onDelete('cascade');
             $table->foreignId('tag_id')->contrained()->onDelete('cascade');
-
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

@@ -11,6 +11,7 @@ use App\Models\post\Post;
 
 class Formulario extends Component
 {
+    public $filas;
     public $categories;
     public $tags;
     public $accion;
@@ -26,14 +27,15 @@ class Formulario extends Component
     public function mount()
     {
         $this->accion = 'crear';
+        $this->categories = Category::all();
+        // dd($this->categories);
+        $this->tags = Tag::all();
+        $this->filas = Post::all();
     }
 
     public function render()
     {
-        $this->categories = Category::all();
-        // dd($this->categories);
-        $this->tags = Tag::all();
-        return view('livewire.forms.formulario', ['categories' => $this->categories, 'tags' => $this->tags]);
+        return view('livewire.forms.formulario', ['filas' => $this->filas, 'categories' => $this->categories, 'tags' => $this->tags]);
     }
 
     public function fncAccion($accion = null)
@@ -56,7 +58,11 @@ class Formulario extends Component
             'is_published' => $this->is_published,
             'category_id' => $this->categoryId,
         ]);
+        // $post->tags()->sync($this->selectedTags);
         $post->tags()->attach($this->selectedTags);
         // $this->slug = Str::slug($this->title);
+        $this->reset('item_id', 'title', 'slug', 'content', 'image_path', 'is_published', 'categoryId', 'selectedTags');
+        $this->reset();
+        $this->mount();
     }
 }
