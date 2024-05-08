@@ -1,6 +1,6 @@
 <!-- resources/views/components/forms/tw_ventana.blade.php -->
 @props([
-    'ancho' => 'w-1/2',
+    'ancho' => 'w-full',
     'alto' => 'h-auto',
     'colorCuerpo' => 'bg-blue-300',
     'colorEncabezado' => 'bg-blue-400',

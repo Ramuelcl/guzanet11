@@ -11,6 +11,7 @@ use App\Models\post\Post;
 
 class Formulario extends Component
 {
+    public $stKey;
     public $filas;
     public $categories;
     public $tags;
@@ -23,10 +24,15 @@ class Formulario extends Component
         $is_published = false,
         $categoryId = '',
         $selectedTags = [];
+    // modal
+    public $titulo,
+        $abrir = false;
 
     public function mount()
     {
-        $this->accion = 'crear';
+        $this->stKey = Str::random($length = 5);
+        $this->accion = 'listar';
+        $this->titulo = 'Listado';
         $this->categories = Category::all();
         // dd($this->categories);
         $this->tags = Tag::all();
@@ -64,5 +70,42 @@ class Formulario extends Component
         $this->reset('item_id', 'title', 'slug', 'content', 'image_path', 'is_published', 'categoryId', 'selectedTags');
         $this->reset();
         $this->mount();
+    }
+
+    public function btnCrear()
+    {
+        $this->titulo = 'Crear registro';
+        $this->accion = 'crear';
+        $this->fncLimpiarDatos($post);
+    }
+    public function btnEditar(Post $post)
+    {
+        $this->titulo = 'Editar registro';
+        $this->accion = 'editar';
+        $this->fncLlenarDatos($post);
+    }
+    public function btnEliminar($id)
+    {
+        $this->titulo = 'Eliminar registro';
+        $this->accion = 'eliminar';
+        $this->fncLlenarDatos($post);
+    }
+    public function fncLlenarDatos($post)
+    {
+        $this->title = $post->title;
+        $this->content = $post->content;
+        $this->image_path = $post->image_path;
+        $this->is_published = $post->is_published;
+        $this->category_id = $post->category_id;
+        // $this->selectedTags = $post->tags();
+    }
+    public function fncLimpiarDatos()
+    {
+        $this->title = '';
+        $this->content = '';
+        $this->image_path = '';
+        $this->is_published = false;
+        $this->category_id = '';
+        $this->selectedTags = [];
     }
 }
