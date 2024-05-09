@@ -83,6 +83,8 @@ class Formulario extends Component
         $this->titulo = 'Editar registro';
         $this->accion = 'editar';
         $this->fncLlenarDatos($post);
+
+        $this->fncAbrir;
     }
     public function btnEliminar($id)
     {
@@ -107,5 +109,10 @@ class Formulario extends Component
         $this->is_published = false;
         $this->category_id = '';
         $this->selectedTags = [];
+    }
+
+    public function fncAbrir()
+    {
+        $this->abrir = !$this->abrir;
     }
 }

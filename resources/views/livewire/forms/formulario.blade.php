@@ -1,18 +1,17 @@
 <div>
 
   <div class="mt-8 rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
-    <ul class="grid list-inside list-disc gap-2 pl-2 sm:grid-cols-1">
-      @foreach ($filas as $key => $item)
-        <li class="flex justify-between space-y-2"
-            wire:key="{{ $stKey . '-' . $key }}">{{ $item->title }}{{ $stKey . '-' . $key }}
-          <div>
-            <button class="m-2 rounded-full bg-green-500 px-2"
-                    wire:click='btnEditar("{{ $item->id }}")'>=</button>
-            <button class="rounded-full bg-red-500 px-2"
-                    wire:click='btnEliminar("{{ $item->id }}")'>X</button>
-          </div>
-        </li>
-      @endforeach
+    ///_ @foreach ($filas as $key => $item)
+      <li class="flex justify-between space-y-2"
+          wire:key="{{ $stKey . '-' . $key }}">{{ $item->title }}{{ $stKey . '-' . $key }}
+        <div>
+          <button class="m-2 rounded-full bg-green-500 px-2"
+                  wire:click='btnEditar("{{ $item->id }}")'>=</button>
+          <button class="rounded-full bg-red-500 px-2"
+                  wire:click='btnEliminar("{{ $item->id }}")'>X</button>
+        </div>
+      </li>
+    @endforeach
     </ul>
   </div>
   @if ($abrir)
