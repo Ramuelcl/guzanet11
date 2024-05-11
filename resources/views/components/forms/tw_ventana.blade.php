@@ -12,10 +12,9 @@
   @isset($titulo)
     <div class="tw_ventana_encabezado {{ $colorEncabezado }} flex items-center justify-between px-4 py-2">
       <h3 class="font-semibold">{{ $titulo }}</h3>
-      <button class="focus:outline-none"
-              onclick="cerrarVentana()">
-        Cerrar
-      </button>
+      {{-- TODO: implementar el cierre volviendo atras --}}
+      {{-- <x-secondary-button class="focus:outline-none"
+                          wire:click="$set('abrir',false)">Cerrar</x-secondary-button> --}}
     </div>
   @endisset
 

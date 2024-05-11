@@ -14,7 +14,7 @@ class Post extends Model
     protected $fillable = ['title', 'slug', 'content', 'image_path', 'is_published', 'category_id'];
 
     // relacion 1-n inversa
-    public function category(): BelongsTo
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }

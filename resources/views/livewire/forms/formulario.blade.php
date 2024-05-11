@@ -1,9 +1,15 @@
 <div>
+  <x-primary-button class="mb-2 w-full"
+                    wire:click="btnCrear">Crear</x-primary-button>
 
-  <div class="mt-8 rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
-    ///_ @foreach ($filas as $key => $item)
+  <div class="rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
+    @foreach ($filas as $key => $item)
       <li class="flex justify-between space-y-2"
-          wire:key="{{ $stKey . '-' . $key }}">{{ $item->title }}{{ $stKey . '-' . $key }}
+          wire:key="{{ 'post' . '-' . $key }}">
+        <p class="text-right">{{ $item->id }}</p>
+        <p class="text-left">{{ $item->title }}</p>
+        <p class="text-right">{{ $item->created_at->format('d/m/Y') }}</p>
+        <p class="text-left">{{ $item->category->name }}</p>
         <div>
           <button class="m-2 rounded-full bg-green-500 px-2"
                   wire:click='btnEditar("{{ $item->id }}")'>=</button>
@@ -17,24 +23,26 @@
   @if ($abrir)
     {{-- modal --}}
     <div class="fixed inset-0 ml-10 flex items-center justify-center bg-gray-800 bg-opacity-25">
-      <div class="w-full max-w-5xl rounded-lg bg-white shadow-md sm:p-4 lg:p-4">
+      <div class="w-full max-w-3xl rounded-lg bg-white shadow-md sm:p-4 lg:p-4">
         {{-- modal --}}
         <x-forms.tw_ventana colorCuerpo="bg-blue-300"
                             colorEncabezado="bg-blue-400"
-                            titulo="{{ $titulo }}">
+                            titulo="{{ $titulo . ' - ' . $post_id }}">
           <div class="mt-0 rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
 
-            <form wire:submit="fncAccion({{ $accion == 'crear' ? null : $item_id }})">
+            <form wire:submit="fncSave({{ $accion == 'crear' ? null : $post_id }})">
               @csrf
               <div class="grid grid-cols-2 gap-4">
                 <div class="mb-4 w-1/2">
                   <x-forms.input label="Título"
+                                 disabled="{{ $accion === 'eliminar' }}"
                                  required
                                  wire:model="title" />
                 </div>
                 <div class="mb-4 w-1/2">
                   <x-forms.input type="textarea"
                                  label="Descripción"
+                                 disabled="{{ $accion === 'eliminar' }}"
                                  required
                                  wire:model="content"></x-forms.input>
                 </div>
@@ -48,7 +56,8 @@
                     <option value=""
                             disabled>Seleccione</option>
                     @foreach ($categories as $category)
-                      <option value="{{ $category->id }}">{{ $category->name }}</option>
+                      <option value="{{ $category->id }}"
+                              :disabled="{{ $accion === 'eliminar' }}">{{ $category->name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -60,17 +69,24 @@
                         <x-forms.checkbox id="{{ $tag->id }}"
                                           value="{{ $tag->id }}"
                                           title="{{ $tag->name }}"
+                                          disabled="{{ $accion === 'eliminar' }}"
                                           wire:model="selectedTags"></x-forms.checkbox>
                       </li>
                     @endforeach
                   </ul>
                 </div>
               </div>
-              <div class="flex justify-end"><x-primary-button>Crear</x-primary-button></div>
-            </form>
+              <div class="flex justify-end">
+                <x-secondary-button class="mr-2"
+                                    wire:click="$set('abrir',false)">Cancelar</x-secondary-button>
+                <x-primary-button
+                                  wire:click="fncSave">{{ $accion == 'crear' ? 'Crear' : ($accion == 'editar' ? 'Actualizar' : 'Eliminar') }}</x-primary-button>
+              </div>
           </div>
-        </x-forms.tw_ventana>
+          </form>
       </div>
+      </x-forms.tw_ventana>
+    </div>
 
   @endif
 </div>
