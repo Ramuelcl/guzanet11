@@ -15,18 +15,22 @@ class Formulario extends Component
     public $categories;
     public $tags;
     public $accion;
-    public $post_id = 0,
-        $title,
-        $slug,
-        $content,
-        $image_path = null,
-        $is_published = false,
-        $categoryId = '',
-        $selectedTags = [];
+    public $post_id = 0;
+
+    #[Validate('required', message: 'Please provide a post title', translate: true)]
+    #[Validate('min:3', message: 'This title is too short', translate: true)]
+    #[Validate('unique:posts,title', message: 'Please provide a post title unique', translate: true)]
+    public $title = '';
+    public $slug = '';
+    public $content = '';
+    public $image_path = null;
+    public $is_published = false;
+    public $categoryId = '';
+    public $selectedTags = [];
 
     protected $rules = [
-        'titulo' => 'required',
-        'contenido' => 'required',
+        'title' => 'required|min:5',
+        'content' => 'required',
         'slug' => 'required|unique:posts,slug',
     ];
 
@@ -52,20 +56,21 @@ class Formulario extends Component
 
     public function fncSave()
     {
-        $slug = Str::slug($this->title);
         // // Verificar si el slug ya existe en la base de datos
         // if (Post::where('slug', $slug)->exists()) {
         //     return back()
         //         ->withErrors(['slug' => 'El slug ya está en uso. Por favor, elige otro.'])
         //         ->withInput();
         // }
-
+        // Generar el nuevo slug
+        $nuevoSlug = $this->generarSlug($this->title);
         // CREATE
         if ($this->accion == 'crear') {
             // Crear el nuevo registro
+            $this->validate();
             $post = Post::Create([
                 'title' => $this->title,
-                'slug' => $slug,
+                'slug' => $nuevoSlug,
                 'content' => $this->content,
                 'image_path' => $this->image_path,
                 'is_published' => $this->is_published,
@@ -77,9 +82,9 @@ class Formulario extends Component
             // UPDATE
         } elseif ($this->accion == 'editar') {
             $post = Post::find($this->post_id);
-            // Generar el nuevo slug
-            $nuevoSlug = $this->generarSlug($slug);
-
+            // $rules['slug'] = 'required|unique:posts,slug,$this->post_id';
+            // dd($post, $this->rules);
+            $this->validate();
             // Verificar si el nuevo slug es diferente y único
             if ($post->slug != $nuevoSlug && !$this->existeSlug($nuevoSlug, $this->post_id)) {
                 $post->slug = $nuevoSlug;
@@ -98,19 +103,20 @@ class Formulario extends Component
             // DESTROY
         } elseif ($this->accion == 'eliminar') {
             $post = Post::find($this->post_id);
+            // dd([$this->post_id, 'post' => $post]);
             $post->delete();
             session()->flash('success', 'Post eliminado exitosamente.');
         }
 
         $this->reset('post_id', 'title', 'slug', 'content', 'image_path', 'is_published', 'categoryId', 'selectedTags');
 
-        // $this->mount();
+        $this->mount();
         return redirect()->route('dashboard');
     }
 
     public function updatedTitulo()
     {
-        $this->slug = Str::slug($this->titulo);
+        $this->slug = $this->generarSlug($this->titulo);
         $this->validateOnly('slug');
     }
 
