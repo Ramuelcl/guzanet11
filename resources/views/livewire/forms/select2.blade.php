@@ -1,3 +1,4 @@
+{{-- resources\views\livewire\forms\select2.blade.php --}}
 <div class="min-h-36 m-0 max-h-36 rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
   <div class="text-nowrap text-base text-blue-500 dark:text-blue-100">
     {{-- <button class=""
@@ -22,9 +23,11 @@
             </span> {{-- wire:mouseenter="changeActiva('{{ $claveUnica }}-{{ $index }}')" --}}
 
           </label>
-          <button class="rounded-full bg-red-400 px-2"
-                  type="button"
-                  wire:click="delete({{ $opcion['id'] }})">x</button>
+          @if ($eliminar)
+            <button class="rounded-full bg-red-400 px-2"
+                    type="button"
+                    wire:click="delete({{ $opcion['id'] }})">x</button>
+          @endif
         </div>
       @endforeach
 

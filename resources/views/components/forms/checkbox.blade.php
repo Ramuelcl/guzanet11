@@ -23,7 +23,3 @@
            ]) !!} />
   </div>
 @endif
-{{-- <label class="flex items-center">
-    <input type="checkbox" class="form-checkbox" name="opcion1">
-    <span class="ml-2">Opción 1</span>
-  </label> --}}

@@ -1,4 +1,5 @@
 <?php
+// {{-- app\livewire\forms\select2.php --}}
 
 namespace App\Livewire\Forms;
 
@@ -8,16 +9,17 @@ use Livewire\Attributes\On;
 class Select2 extends Component
 {
     public $check, $opcion, $opciones, $seleccionadas;
-    public $claveUnica, $Activa;
+    public $claveUnica, $Activa, $eliminar;
     public $vIndex = false;
 
-    public function mount($opciones = [], $seleccionadas = [], $multiple = true)
+    public function mount($opciones = [], $seleccionadas = [], $multiple = true, $eliminar = false)
     {
         $this->claveUnica = substr(str_shuffle($characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, $length = 5);
         // dd($this->claveUnica);
         $this->opciones = $opciones;
         $this->seleccionadas = $seleccionadas;
         $this->multiple = $multiple;
+        $this->eliminar = $eliminar;
     }
     public function render()
     {
@@ -32,8 +34,8 @@ class Select2 extends Component
             $this->seleccionadas[] = $opcionId;
         }
 
-        // dump($this->seleccionadas); // Solo para fines de depuración
-        $this->dispatch('seleccionActualizada', seleccionadas: $this->seleccionadas)->self();
+        $this->selectedTags = $this->getSelectedTags();
+        $this->dispatch('seleccionActualizada', $this->selectedTags); // Cambio aquí
     }
 
     public function delete($index)
@@ -53,5 +55,15 @@ class Select2 extends Component
     public function changeActiva($valor)
     {
         $this->Activa = $valor;
+    }
+    public function getSelectedTags()
+    {
+        return $this->seleccionadas;
+
+        $opcionesArray = $this->opciones->toArray(); // Convertimos la colección a un array
+
+        return array_filter($opcionesArray, function ($opcion) {
+            return in_array($opcion['id'], $this->seleccionadas);
+        });
     }
 }

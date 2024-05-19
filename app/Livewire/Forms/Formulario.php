@@ -1,4 +1,5 @@
 <?php
+// app\livewire\forms\formulario.php
 
 namespace App\Livewire\Forms;
 
@@ -21,7 +22,6 @@ class Formulario extends Component
     #[Validate('min:3', message: 'This title is too short', translate: true)]
     #[Validate('unique:posts,title', message: 'Please provide a post title unique', translate: true)]
     public $title = '';
-    public $slug = '';
     public $content = '';
     public $image_path = null;
     public $is_published = false;
@@ -29,14 +29,34 @@ class Formulario extends Component
     public $selectedTags = [];
 
     protected $rules = [
-        'title' => 'required|min:5',
-        'content' => 'required',
-        'slug' => 'required|unique:posts,slug',
+        'title' => 'required|min:3|unique:posts,title',
+        'content' => 'required|min:5',
+        'categoryId' => 'required|exists:categories,id',
+        'selectedTags' => 'array|exists:tags,id',
+    ];
+
+    protected $messages = [
+        'title.required' => 'Please provide a post title',
+        'title.min' => 'This title is too short',
+        'title.unique' => 'Please provide a unique post title',
+        'content.required' => 'Content is required',
+        'content.min' => 'Content is too short',
+        'categoryId.required' => 'Please select a category',
+        'categoryId.exists' => 'Selected category does not exist',
+        'selectedTags.exists' => 'One or more selected tags do not exist',
     ];
 
     // modal
     public $titulo,
         $abrir = false;
+
+    protected $listeners = ['seleccionActualizada'];
+
+    public function seleccionActualizada($seleccionadas)
+    {
+        // dd('llegó');
+        $this->selectedTags = $seleccionadas;
+    }
 
     public function mount()
     {
@@ -51,23 +71,31 @@ class Formulario extends Component
 
     public function render()
     {
-        return view('livewire.forms.formulario', ['filas' => $this->filas, 'categories' => $this->categories, 'tags' => $this->tags]);
+        // Accede a las configuraciones
+        $campos = config('PostCampos');
+
+        return view('livewire.forms.formulario', ['fields' => $this->filas, 'categories' => $this->categories, 'tags' => $this->tags, 'campos' => $campos]);
     }
 
     public function fncSave()
     {
-        // // Verificar si el slug ya existe en la base de datos
-        // if (Post::where('slug', $slug)->exists()) {
-        //     return back()
-        //         ->withErrors(['slug' => 'El slug ya está en uso. Por favor, elige otro.'])
-        //         ->withInput();
-        // }
+        // Imprimir datos antes de la validación
+        // dd('Pre-validation data', $this->accion, [
+        //     'title' => $this->title,
+        //     'content' => $this->content,
+        //     'categoryId' => $this->categoryId,
+        //     'selectedTags' => $this->selectedTags,
+        //     'rules' => $this->rules(),
+        // ]);
+
+        $paso = $this->validate($this->rules());
+        // dd('fncSave', 'Validation passed', $paso);
+
         // Generar el nuevo slug
         $nuevoSlug = $this->generarSlug($this->title);
-        // CREATE
         if ($this->accion == 'crear') {
+            // CREATE
             // Crear el nuevo registro
-            $this->validate();
             $post = Post::Create([
                 'title' => $this->title,
                 'slug' => $nuevoSlug,
@@ -83,8 +111,8 @@ class Formulario extends Component
         } elseif ($this->accion == 'editar') {
             $post = Post::find($this->post_id);
             // $rules['slug'] = 'required|unique:posts,slug,$this->post_id';
-            // dd($post, $this->rules);
-            $this->validate();
+            // dd($post, $this->selectedTags);
+
             // Verificar si el nuevo slug es diferente y único
             if ($post->slug != $nuevoSlug && !$this->existeSlug($nuevoSlug, $this->post_id)) {
                 $post->slug = $nuevoSlug;
@@ -104,14 +132,34 @@ class Formulario extends Component
         } elseif ($this->accion == 'eliminar') {
             $post = Post::find($this->post_id);
             // dd([$this->post_id, 'post' => $post]);
-            $post->delete();
-            session()->flash('success', 'Post eliminado exitosamente.');
+            if ($post) {
+                // Eliminar las relaciones en la tabla pivote
+                $post->tags()->detach();
+
+                // Eliminar el post
+                $post->delete();
+
+                session()->flash('success', 'Post y sus tags asociados eliminados exitosamente.');
+            } else {
+                session()->flash('error', 'Post no encontrado.');
+            }
         }
 
-        $this->reset('post_id', 'title', 'slug', 'content', 'image_path', 'is_published', 'categoryId', 'selectedTags');
-
+        $this->reset('post_id', 'title', 'content', 'image_path', 'is_published', 'categoryId', 'selectedTags');
+        $this->fncCerrar();
         $this->mount();
         return redirect()->route('dashboard');
+    }
+
+    public function rules()
+    {
+        return [
+            'title' => 'required|min:3|unique:posts,title,' . $this->post_id,
+            // 'slug' => 'required|unique:posts,slug,' . $this->post_id,
+            'content' => 'required|min:5',
+            'categoryId' => 'required|exists:categories,id',
+            'selectedTags' => 'array|exists:tags,id',
+        ];
     }
 
     public function updatedTitulo()
@@ -119,16 +167,24 @@ class Formulario extends Component
         $this->slug = $this->generarSlug($this->titulo);
         $this->validateOnly('slug');
     }
+    public function updated($propertyName)
+    {
+        if ($propertyName !== 'Titulo') {
+            $this->validateOnly($propertyName);
+        }
+    }
 
     public function btnCrear()
     {
         $this->titulo = 'Crear registro';
         $this->accion = 'crear';
         $this->fncAbrir();
+        // dd($this->titulo, $this->abrir);
         // $this->fncLimpiarDatos($post);
     }
     public function btnEditar(Post $postId)
     {
+        // dd($this->titulo, $this->abrir, $postId);
         $this->titulo = 'Editar registro';
         $this->accion = 'editar';
         $this->post_id = $postId->id;
@@ -166,7 +222,11 @@ class Formulario extends Component
 
     public function fncAbrir()
     {
-        $this->abrir = !$this->abrir;
+        $this->abrir = true;
+    }
+    public function fncCerrar()
+    {
+        $this->abrir = false;
     }
 
     // Función para generar un nuevo slug

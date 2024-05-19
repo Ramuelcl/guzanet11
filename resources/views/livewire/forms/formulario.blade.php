@@ -1,24 +1,51 @@
 <div>
+  {{-- resources\views\livewire\forms\formulario.blade.php --}}
   <x-primary-button class="mb-2 w-full"
                     wire:click="btnCrear">Crear</x-primary-button>
 
   <div class="rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
-    @foreach ($filas as $key => $item)
-      <li class="flex justify-between space-y-2"
-          wire:key="{{ 'post' . '-' . $key }}">
-        <p class="text-right">{{ $item->id }}</p>
-        <p class="text-left">{{ $item->title }}</p>
-        <p class="text-right">{{ $item->created_at->format('d/m/Y') }}</p>
-        <p class="text-left">{{ $item->category->name }}</p>
-        <div>
-          <button class="m-2 rounded-full bg-green-500 px-2"
-                  wire:click='btnEditar("{{ $item->id }}")'>=</button>
-          <button class="rounded-full bg-red-500 px-2"
-                  wire:click='btnEliminar("{{ $item->id }}")'>X</button>
-        </div>
-      </li>
-    @endforeach
-    </ul>
+    <table class="w-full table-auto"
+           wire:poll.3000ms>
+      <thead>
+        <tr>
+          @include('includes.titulos')
+          <th class="px-4 py-1 text-center text-gray-900 dark:text-white">{{ __('Actions') }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($fields as $field)
+          <tr>
+            @include('includes.campos')
+
+            <td class="px-4 py-1 text-center">
+
+              {{-- ver un registro --}}
+              {{-- <x-forms.tw_button color="gray" icon='eye' class="" name="ver"
+                    ejecuta="fncVerCrearEditarEliminar($field->id, 'ver')">
+                  </x-forms.tw_button> --}}
+
+              {{-- editar un registro --}}
+              {{-- <button wire:click="btnEditar({{ $field->id }})">{{ __('Edit') }}</button> --}}
+              <x-forms.tw_button ejecuta="btnEditar({{ $field->id }})"
+                                 color="green">{{ __('Edit') }}
+              </x-forms.tw_button>
+
+              {{-- borrar un registro --}}
+              <x-forms.tw_button ejecuta="btnEliminar({{ $field->id }})"
+                                 color="red">{{ __('Delete') }}
+              </x-forms.tw_button>
+              {{-- roles --}}
+              {{-- <x-forms.tw_button wire:click="fncRoles($field->id)"
+                                 color="violet">{{ __('Role') }}
+              </x-forms.tw_button> --}}
+              {{-- <x-forms.tw_button wire:click="fncPermisos($field->id)" color="yellow">{{ __('Permission') }}
+                  </x-forms.tw_button> --}}
+            </td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+    {{-- {{ $fields->links() }} --}}
   </div>
   @if ($abrir)
     {{-- modal --}}
@@ -27,83 +54,77 @@
         {{-- modal --}}
         <x-forms.tw_ventana colorCuerpo="bg-blue-300"
                             colorEncabezado="bg-blue-400"
-                            titulo="{{ $titulo . ' - ' . $post_id }}">
+                            titulo="{{ $titulo }} {{ $post_id == 0 ? '' : ' - ' . $post_id }}">
           <div class="mt-0 rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
 
             <form wire:submit="fncSave({{ $accion == 'crear' ? null : $post_id }})">
               {{-- @csrf --}}
               <div class="grid grid-cols-2 gap-2">
                 <div class="mb-4">
-                  <label class = 'text-base font-semibold text-blue-500 dark:text-blue-100'
-                         for="title">
-                    Título
-                    <input class='form-input mt-1 w-full rounded-md border-blue-400 font-normal text-blue-500 focus:border-blue-600 dark:text-blue-100'
-                           id   ="title"
-                           name="title"
-                           type="text"
-                           required
-                           wire:model="title" />
-                  </label>
-                  @error('title')
-                    <span class="mt-2 text-xs text-red-600 dark:text-red-500">{{ $message }}</span>
-                  @enderror
-
-
-                  {{-- <x-forms.input id="title"
+                  <x-forms.input idName="title"
                                  label="Título"
                                  disabled="{{ $accion === 'eliminar' }}"
                                  required
-                                 wire:model="title" /> --}}
+                                 wire:model="title" />
                 </div>
                 <div class="mb-4">
-                  <x-forms.input id="content"
+                  <x-forms.input idName="content"
                                  type="textarea"
                                  label="Descripción"
                                  disabled="{{ $accion === 'eliminar' }}"
                                  required
-                                 wire:model="content"></x-forms.input>
+                                 wire:model="content" />
                 </div>
               </div>
               <div class="grid grid-cols-2 gap-2">
                 <div class="mb-4">
-                  <x-forms.label class="ml-4">Categoria</x-forms.label>
-                  <select class="form-input mt-1 block w-full rounded-md border-blue-400 font-normal text-blue-500 focus:border-blue-600 dark:text-blue-500"
-                          required
-                          wire:model="categoryId">
-                    <option value=""
-                            disabled>Seleccione</option>
-                    @foreach ($categories as $category)
-                      <option value="{{ $category->id }}"
-                              :disabled="{{ $accion === 'eliminar' }}">{{ $category->name }}</option>
-                    @endforeach
-                  </select>
+                  <x-forms.input idName="categoryId"
+                                 type="select"
+                                 label="Categoría"
+                                 :options="$categories->pluck('name', 'id')"
+                                 :disabled="$accion === 'eliminar'"
+                                 wire:model="categoryId" />
+
                 </div>
                 <div class="mb-4">
                   <x-forms.label class="ml-4">Marcas</x-forms.label>
-                  <ul class="grid gap-2 pl-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                  @livewire('forms.select2', [($opciones = $tags), ($seleccionadas = $selectedTags)])
+
+                  {{-- <ul class="grid grid-cols-1">
                     @foreach ($tags as $tag)
                       <li class="ml-4">
-                        <x-forms.checkbox id="{{ $tag->id }}"
-                                          value="{{ $tag->id }}"
-                                          title="{{ $tag->name }}"
-                                          disabled="{{ $accion === 'eliminar' }}"
-                                          wire:model="selectedTags"></x-forms.checkbox>
+                        <x-forms.input class="col-span-1 block"
+                                       id="{{ $tag->id }}"
+                                       type="checkbox"
+                                       value="{{ $tag->id }}"
+                                       label="{{ $tag->name }}"
+                                       disabled="{{ $accion === 'eliminar' }}"
+                                       wire:model="selectedTags"></x-forms.input>
                       </li>
                     @endforeach
-                  </ul>
+                  </ul> --}}
                 </div>
               </div>
           </div>
           <div class="mt-4 flex justify-end">
             <x-secondary-button class="mr-2"
                                 wire:click="$set('abrir',false)">Cancelar</x-secondary-button>
-            <x-primary-button
+            <x-primary-button type="submit"
                               wire:click="fncSave">{{ $accion == 'crear' ? 'Crear' : ($accion == 'editar' ? 'Actualizar' : 'Eliminar') }}</x-primary-button>
           </div>
           </form>
       </div>
       </x-forms.tw_ventana>
     </div>
-
   @endif
+
+  {{-- <x-dialog-modal>
+    <x-slot name="title">
+      {{ $titulo }} {{ $post_id == 0 ? '' : ' - ' . $post_id }}
+    </x-slot>
+    <x-slot name="content">
+    </x-slot>
+    <x-slot name="footer">
+    </x-slot>
+  </x-dialog-modal> --}}
 </div>
