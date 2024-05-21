@@ -5,23 +5,18 @@
 
   <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
     <div class="border-b border-gray-200 p-6">
-
+      {{-- <x-forms.tw_button class="additional-class"
+                         type="button"
+                         color="blue"
+                         icon="archive">
+        Guardar
+      </x-forms.tw_button> --}}
+      {{-- <x-forms.tw_icons name="archive"
+                        typeIcon="solid" /> --}}
+      <div class="mb-4">
+        @livewire('forms.mensajes')
+      </div>
       @livewire('forms.formulario')
-
-      <br>
-      @php
-        $opciones = [
-            ['id' => 1, 'name' => 'uno'],
-            ['id' => 2, 'name' => 'dos'],
-            ['id' => 3, 'name' => 'tres'],
-            ['id' => 4, 'name' => 'cuatro'],
-            ['id' => 55, 'name' => 'cinco'],
-            ['id' => 44, 'name' => 'seis'],
-        ];
-        $seleccionadas = [2, 44, 4];
-      @endphp
-
-      @livewire('forms.select2', [$opciones, $seleccionadas])
 
     </div>
   </div>

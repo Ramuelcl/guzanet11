@@ -45,6 +45,12 @@ class Formulario extends Component
         'categoryId.exists' => 'Selected category does not exist',
         'selectedTags.exists' => 'One or more selected tags do not exist',
     ];
+    // protected $attributes = [
+    //     'title' => 'titulo',
+    //     'content' => 'contenido',
+    //     'categoryId' => 'category',
+    //     'selectedTags' => 'marcas',
+    // ];
 
     // modal
     public $titulo,
@@ -88,7 +94,7 @@ class Formulario extends Component
         //     'rules' => $this->rules(),
         // ]);
 
-        $paso = $this->validate($this->rules());
+        $paso = $this->validate($this->rules(), $this->messages, ['categoryId' => 'categoriia', 'content' => 'contenidoo']);
         // dd('fncSave', 'Validation passed', $paso);
 
         // Generar el nuevo slug
@@ -159,6 +165,29 @@ class Formulario extends Component
             'content' => 'required|min:5',
             'categoryId' => 'required|exists:categories,id',
             'selectedTags' => 'array|exists:tags,id',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'title.required' => 'El título es obligatorio.',
+            'title.min' => 'El título debe tener al menos :min caracteres.',
+            'title.unique' => 'El título ya está en uso, por favor elija otro.',
+            'content.required' => 'El contenido es obligatorio.',
+            'content.min' => 'El contenido debe tener al menos :min caracteres.',
+            'categoryId.required' => 'Debe seleccionar una categoría.',
+            'categoryId.exists' => 'La categoría seleccionada no es válida.',
+            'selectedTags.array' => 'Los tags seleccionados deben ser un arreglo.',
+            'selectedTags.exists' => 'Algunos de los tags seleccionados no son válidos.',
+        ];
+    }
+    public function attributes()
+    {
+        return [
+            'title' => 'título',
+            'content' => 'contenido',
+            'categoryId' => 'categoría',
+            'selectedTags' => 'tags seleccionados',
         ];
     }
 

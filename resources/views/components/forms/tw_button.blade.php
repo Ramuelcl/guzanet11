@@ -1,17 +1,16 @@
+{{-- resources\views\components\tw_button.blade.php --}}
 @props([
     'name' => 'button',
     'type' => 'button',
     'color' => 'blue',
     'class' => '',
-    'classFix' => 'inline-flex items-center justify-center min-w-20 rounded-md p-2 focus:outline-none focus:ring ',
+    'classFix' => 'inline-flex items-center justify-center p-2 focus:outline-none focus:ring ',
     'icon' => null,
+    'iconType' => 'outline', // Default icon type, outline
     'ejecuta' => '',
 ])
-{{-- resources\views\components\tw_button.blade.php --}}
+
 @php
-  // if (isset($onclick)) {
-  //     dump($onclick);
-  // }
   $colors = [
       'blue' =>
           'bg-blue-600 dark:bg-blue-400 text-blue-100 dark:text-blue-800 hover:bg-blue-400 dark:hover:bg-blue-200 active:bg-blue-400 dark:active:bg-blue-200 focus:ring-blue-700 dark:focus:ring-blue-500 disabled:bg-blue-300 dark:disabled:bg-blue-200 disabled:cursor-not-allowed',
@@ -33,20 +32,18 @@
   // Comprobar si el color existe en el arreglo, si no, usar el color por defecto
   $colorClass = array_key_exists($color, $colors) ? $colors[$color] : $colors[$defaultColor];
 
-  $classFix = $classFix . $colorClass;
-
-  if ($icon) {
-      $iconPath = public_path('images/app/icons/outline/' . $icon . '.blade.php');
-      $icon = file_exists($iconPath) ? file_get_contents($iconPath) : null;
-  }
+  $buttonClass = $classFix . $colorClass . ' ' . $class;
 @endphp
-<button class="{{ $classFix }} {{ $class }}"
+
+<button class="{{ $buttonClass }} {{ $slot->isEmpty() ? 'min-w-1 rounded-full' : 'min-w-20 rounded-md' }}"
         id="{{ $name }}"
         name="{{ $name }}"
         type="{{ $type }}"
         @if ($ejecuta) wire:click="{{ $ejecuta }}" @endif>
-  @if (isset($icon))
-    {!! str_replace('<svg ', '<svg class="w-6 h-6" ', $icon) !!}
+  @if ($icon)
+    <x-forms.tw_icons class="{{ $slot->isEmpty() ? 'm-auto h-5 w-5' : 'mr-2 h-5 w-5' }}"
+                      :name="$icon"
+                      :type="$iconType" />
   @endif
-  {{ $slot ?? null }}
+  {{ $slot }}
 </button>

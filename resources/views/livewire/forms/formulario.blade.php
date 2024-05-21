@@ -1,7 +1,9 @@
 <div>
   {{-- resources\views\livewire\forms\formulario.blade.php --}}
-  <x-primary-button class="mb-2 w-full"
-                    wire:click="btnCrear">Crear</x-primary-button>
+  <x-forms.tw_button class="mb-2 w-full"
+                     color="blue"
+                     icon="plus"
+                     wire:click="btnCrear">Crear</x-forms.tw_button>
 
   <div class="rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
     <table class="w-full table-auto"
@@ -27,12 +29,14 @@
               {{-- editar un registro --}}
               {{-- <button wire:click="btnEditar({{ $field->id }})">{{ __('Edit') }}</button> --}}
               <x-forms.tw_button ejecuta="btnEditar({{ $field->id }})"
-                                 color="green">{{ __('Edit') }}
+                                 icon="pencil"
+                                 color="green">
               </x-forms.tw_button>
 
               {{-- borrar un registro --}}
               <x-forms.tw_button ejecuta="btnEliminar({{ $field->id }})"
-                                 color="red">{{ __('Delete') }}
+                                 icon="x"
+                                 color="red">
               </x-forms.tw_button>
               {{-- roles --}}
               {{-- <x-forms.tw_button wire:click="fncRoles($field->id)"
@@ -117,14 +121,4 @@
       </x-forms.tw_ventana>
     </div>
   @endif
-
-  {{-- <x-dialog-modal>
-    <x-slot name="title">
-      {{ $titulo }} {{ $post_id == 0 ? '' : ' - ' . $post_id }}
-    </x-slot>
-    <x-slot name="content">
-    </x-slot>
-    <x-slot name="footer">
-    </x-slot>
-  </x-dialog-modal> --}}
 </div>

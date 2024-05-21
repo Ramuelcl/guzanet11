@@ -5,6 +5,10 @@ return [
     'clave' => 'valor',
     'aplicacion' => 'Guzanet',
     'idioma' => 'es-CL',
+    'icon_paths' => [
+        'solid' => 'images/app/icons/solid',
+        'outline' => 'images/app/icons/outline',
+    ],
 ];
 
 /**
