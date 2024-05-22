@@ -109,6 +109,9 @@ class Formulario extends Component
                     ->orWhere('created_at', 'like', $filter)
                     ->orWhereHas('category', function ($query) use ($filter) {
                         $query->where('name', 'like', $filter);
+                    })
+                    ->orWhereHas('tags', function ($query) use ($filter) {
+                        $query->where('name', 'like', $filter);
                     });
             })
             ->get();
