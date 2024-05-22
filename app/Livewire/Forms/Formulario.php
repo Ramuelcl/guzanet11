@@ -18,15 +18,15 @@ class Formulario extends Component
     public $accion;
     public $post_id = 0;
 
-    #[Validate('required', message: 'Please provide a post title', translate: true)]
-    #[Validate('min:3', message: 'This title is too short', translate: true)]
-    #[Validate('unique:posts,title', message: 'Please provide a post title unique', translate: true)]
     public $title = '';
     public $content = '';
     public $image_path = null;
     public $is_published = false;
     public $categoryId = '';
     public $selectedTags = [];
+
+    public $sortBy = 'id'; // Campo por defecto para ordenar
+    public $sortDirection = 'desc'; // Dirección por defecto para ordenar
 
     protected $rules = [
         'title' => 'required|min:3|unique:posts,title',
@@ -80,7 +80,7 @@ class Formulario extends Component
         $this->categories = Category::all();
         // dd($this->categories);
         $this->tags = Tag::all();
-        $this->filas = Post::all();
+        $this->filter();
     }
 
     public function render()
@@ -96,7 +96,7 @@ class Formulario extends Component
     {
         // Si $this->search está vacío, devolver todos los registros.
         if (empty($this->search)) {
-            $this->filas = Post::all();
+            $this->filas = Post::orderBy($this->sortBy, $this->sortDirection)->get();
             return;
         }
         $filter = '%' . $this->search . '%';
@@ -114,7 +114,25 @@ class Formulario extends Component
                         $query->where('name', 'like', $filter);
                     });
             })
+            ->orderBy($this->sortBy, $this->sortDirection)
+
             ->get();
+    }
+
+    public function sortBy($field)
+    {
+        dd($field);
+        // Cambia el campo de ordenamiento si ya se está ordenando por el mismo campo
+        if ($this->sortBy === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            // Si no, cambia al nuevo campo y establece la dirección predeterminada
+            $this->sortBy = $field;
+            $this->sortDirection = 'asc';
+        }
+
+        // Aplica el filtro con el nuevo orden
+        $this->filter();
     }
 
     public function fncSave()

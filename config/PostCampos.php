@@ -12,6 +12,8 @@ return [
         // tipo de campo
         'tipo' => 'integer',
         'decimal' => 0,
+        'filter' => true,
+        'orderBy' => true,
     ],
 
     'title' => [
@@ -23,6 +25,8 @@ return [
         'visible2' => true,
         // tipo de campo
         'tipo' => 'string',
+        'filter' => true,
+        'orderBy' => true,
     ],
 
     'content' => [
@@ -34,6 +38,8 @@ return [
         'visible2' => true,
         // tipo de campo
         'tipo' => 'string',
+        'filter' => true,
+        'orderBy' => false,
     ],
 
     'category_id' => [
@@ -46,6 +52,8 @@ return [
         // tipo de campo
         'tipo' => 'combo-box',
         'table' => 'categories',
+        'filter' => true,
+        'orderBy' => true,
     ],
 
     'tag_id' => [
@@ -58,6 +66,8 @@ return [
         // tipo de campo
         'tipo' => 'tags',
         'table' => 'tags',
+        'filter' => true,
+        'orderBy' => false,
     ],
 
     'image_path' => [
@@ -69,6 +79,8 @@ return [
         'visible2' => false,
         // tipo de campo
         'tipo' => 'image',
+        'filter' => false,
+        'orderBy' => false,
     ],
 
     'is_published' => [
@@ -80,6 +92,9 @@ return [
         'visible2' => true,
         // tipo de campo
         'tipo' => 'checkit',
+        'filter' => false,
+        'orderBy' => false,
+        'is_active' => true,
     ],
 
     'created_at' => [
@@ -91,5 +106,7 @@ return [
         'visible2' => false,
         // tipo de campo
         'tipo' => 'date',
+        'filter' => true,
+        'orderBy' => true,
     ],
 ];

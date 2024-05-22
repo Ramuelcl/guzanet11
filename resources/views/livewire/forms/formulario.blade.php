@@ -4,14 +4,14 @@
     <x-forms.tw_icons class="mr-2 mt-2 justify-start"
                       name="table" />
     <div>@livewire('forms.Search', ['search' => $search])</div>
-    <div>{{ $search }}</div>
+    {{-- <div>{{ $search }}</div> --}}
     <x-forms.tw_button class="mb-1 mr-4 justify-self-stretch"
                        color="blue"
                        icon="plus"
                        ejecuta="btnCrear">Crear</x-forms.tw_button>
   </div>
   <div class="rounded-md border border-b-2 border-l-2 border-blue-500 p-2 shadow-md shadow-blue-500">
-    <table class="w-full table-auto"
+    <table class="min-w-full table-auto"
            wire:poll.3000ms>
       <thead>
         <tr>
