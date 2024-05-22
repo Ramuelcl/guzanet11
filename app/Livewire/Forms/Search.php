@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Search extends Component
 {
-    public $search = '';
+    public $search;
 
     public function render()
     {
@@ -15,10 +15,10 @@ class Search extends Component
 
     public function updatedSearch()
     {
-        // $this->emit('searchUpdated', $this->search);
+        $this->dispatch('searchUpdated', $this->search);
     }
     public function queBuscar()
     {
-        // dd($this->search);
+        $this->updatedSearch();
     }
 }

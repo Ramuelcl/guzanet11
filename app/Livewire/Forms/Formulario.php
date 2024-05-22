@@ -56,7 +56,15 @@ class Formulario extends Component
     public $titulo,
         $abrir = false;
 
-    protected $listeners = ['seleccionActualizada'];
+    protected $listeners = ['seleccionActualizada', 'searchUpdated'];
+
+    // Search
+    public $search = '';
+
+    public function searchUpdated($search)
+    {
+        $this->search = $search;
+    }
 
     public function seleccionActualizada($seleccionadas)
     {
