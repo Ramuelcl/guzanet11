@@ -87,8 +87,31 @@ class Formulario extends Component
     {
         // Accede a las configuraciones
         $campos = config('PostCampos');
-
+        $this->filter();
+        // dump($this->filas);
         return view('livewire.forms.formulario', ['fields' => $this->filas, 'categories' => $this->categories, 'tags' => $this->tags, 'campos' => $campos]);
+    }
+
+    public function filter()
+    {
+        // Si $this->search está vacío, devolver todos los registros.
+        if (empty($this->search)) {
+            $this->filas = Post::all();
+            return;
+        }
+        $filter = '%' . $this->search . '%';
+        $this->filas = Post::query()
+            ->when($this->search, function ($query) use ($filter) {
+                $query
+                    ->where('id', 'like', $filter)
+                    ->orWhere('title', 'like', $filter)
+                    ->orWhere('content', 'like', $filter)
+                    ->orWhere('created_at', 'like', $filter)
+                    ->orWhereHas('category', function ($query) use ($filter) {
+                        $query->where('name', 'like', $filter);
+                    });
+            })
+            ->get();
     }
 
     public function fncSave()

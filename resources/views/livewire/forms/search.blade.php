@@ -13,5 +13,5 @@
     </x-forms.tw_button>
     {{-- Emitir un evento para notificar que la búsqueda ha sido actualizada --}}
   </div>
-  <div>{{ $search }}</div>
+  {{-- <div>{{ $search }}</div> --}}
 </div>

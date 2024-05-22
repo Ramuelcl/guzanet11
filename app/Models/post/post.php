@@ -1,5 +1,5 @@
 <?php
-
+// app\models\post\post.php
 namespace App\Models\post;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +16,7 @@ class Post extends Model
     // relacion 1-n inversa
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id'); // Aquí corregimos 'categories_id' a 'category_id'
     }
 
     // relacion n-n inversa
