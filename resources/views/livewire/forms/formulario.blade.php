@@ -3,7 +3,7 @@
   <x-forms.tw_button class="mb-2 w-full"
                      color="blue"
                      icon="plus"
-                     wire:click="btnCrear">Crear</x-forms.tw_button>
+                     ejecuta="btnCrear">Crear</x-forms.tw_button>
 
   <div class="rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
     <table class="w-full table-auto"

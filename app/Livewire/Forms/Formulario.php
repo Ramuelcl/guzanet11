@@ -112,6 +112,8 @@ class Formulario extends Component
             ]);
             $post->tags()->sync($this->selectedTags);
             session()->flash('success', 'Post creado exitosamente.');
+            $tipo = 'success';
+            $mensaje = 'Post creado exitosamente.';
 
             // UPDATE
         } elseif ($this->accion == 'editar') {
@@ -133,6 +135,8 @@ class Formulario extends Component
             ]);
             $post->tags()->sync($this->selectedTags);
             session()->flash('success', 'Post editado exitosamente.');
+            $tipo = 'success';
+            $mensaje = 'Post editado exitosamente.';
 
             // DESTROY
         } elseif ($this->accion == 'eliminar') {
@@ -146,14 +150,21 @@ class Formulario extends Component
                 $post->delete();
 
                 session()->flash('success', 'Post y sus tags asociados eliminados exitosamente.');
+                $tipo = 'success';
+                $mensaje = 'Post y sus tags asociados eliminados exitosamente.';
             } else {
                 session()->flash('error', 'Post no encontrado.');
+                $tipo = 'error';
+                $mensaje = 'Post no encontrado.';
             }
         }
 
         $this->reset('post_id', 'title', 'content', 'image_path', 'is_published', 'categoryId', 'selectedTags');
         $this->fncCerrar();
         $this->mount();
+
+        $this->dispatch('mensaje-nuevo', [$tipo, $mensaje]);
+
         return redirect()->route('dashboard');
     }
 
@@ -191,17 +202,20 @@ class Formulario extends Component
         ];
     }
 
-    public function updatedTitulo()
+    // una vez el cambio ha sido hecho
+    public function updated($propertyName, $value)
     {
-        $this->slug = $this->generarSlug($this->titulo);
-        $this->validateOnly('slug');
-    }
-    public function updated($propertyName)
-    {
-        if ($propertyName !== 'Titulo') {
-            $this->validateOnly($propertyName);
+        if ($propertyName == 'title') {
+            $this->slug = $this->generarSlug($value);
         }
+        // dump($propertyName, $value, $this->slug);
+        $this->validateOnly($propertyName, $this->rules());
     }
+    // antes de hacer el cambio
+    // public function updating($property, $value)
+    // {
+    //     dump($property, $value);
+    // }
 
     public function btnCrear()
     {

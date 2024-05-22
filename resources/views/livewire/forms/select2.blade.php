@@ -1,5 +1,5 @@
 {{-- resources\views\livewire\forms\select2.blade.php --}}
-<div class="min-h-36 m-0 max-h-36 rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
+<div class="min-h-36 border-1 m-0 max-h-36 rounded-md border bg-white p-2 shadow-md shadow-blue-500">
   <div class="text-nowrap text-base text-blue-500 dark:text-blue-100">
     {{-- <button class=""
             type="button"

@@ -52,13 +52,13 @@
       </main>
     </div>
   </div>
-  {{-- <script src="{{ 'resources/js/init-alpine.js' }}"></script> --}}
+  <script src="{{ 'resources/js/init-alpine.js' }}"></script>
   <script rel="script"
           type="text/javascript"
           src="resources/js/mod-dark.js"></script>
-  {{-- @push('modals')
-  @endpush --}}
+  @stack('modals')
   @livewireScripts
+  @stack('js')
 </body>
 
 </html>

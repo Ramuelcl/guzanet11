@@ -1,6 +1,8 @@
 <?php
 
 use App\Livewire\admin\UserController;
+use App\Http\Controllers\principalController;
+
 use App\Livewire\forms\search;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +11,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::view('about', 'about')->name('about');
+Route::controller(principalController::class)
+    ->prefix('')
+    ->as('')
+    ->group(function () {
+        Route::get('/iconos/{typeIcon?}', 'iconos')->name('iconos');
+        // route::get('/testInput', 'testInput')->name('testInput');
+        // route::get('/porDefinir', 'porDefinir')->name('porDefinir');
+        // route::get('/todo', 'todo')->name('todo');
+        // route::get('/acercade', 'acercade')->name('acercade');
+        // route::get('/contacto', 'contacto')->name('contacto');
+        // route::post('/contacto', 'contacto')->name('contacto.enviar');
+
+        // route::get('/direcciones', 'direcciones')->name('direcciones');
+    });
 
 Route::prefix('admin')
     ->middleware('auth')

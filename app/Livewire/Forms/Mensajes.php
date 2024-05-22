@@ -3,17 +3,20 @@
 namespace App\Livewire\Forms;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class Mensajes extends Component
 {
-    public $mensajes = ['artículo 1 creado', 'artículo 2 creado', 'artículo 3 creado'];
+    public $mensajes = [];
+
     public function render()
     {
         return view('livewire.forms.mensajes');
     }
 
-    public function nuevoMensaje($mensaje)
+    #[On('mensaje-nuevo')]
+    public function nuevoMensaje($tipo = 'success', $mensaje)
     {
-        array_unshift($this->mensajes, $mensaje);
+        array_unshift($this->mensajes, [$tipo, $mensaje]);
     }
 }

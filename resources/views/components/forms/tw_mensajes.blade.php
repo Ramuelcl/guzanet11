@@ -1,6 +1,6 @@
 @if (Session::has('success'))
   {{-- SUCCESS --}}
-  <div class="m-2 mb-4 inline-flex w-full rounded-lg border-2 border-green-700 bg-white shadow-md">
+  <div class="m-2 mb-4 inline-flex w-full overflow-hidden rounded-lg border-2 border-green-700 bg-white shadow-md">
     <div class="flex w-12 items-center justify-center bg-green-500">
       <svg class="h-6 w-6 fill-current text-white"
            xmlns="http://www.w3.org/2000/svg"
