@@ -6,7 +6,7 @@
     'class' => '',
     'classFix' => 'inline-flex items-center justify-center p-2 focus:outline-none focus:ring ',
     'icon' => null,
-    'iconType' => 'outline', // Default icon type, outline
+    'iconType' => 'outline', // Default icon type, outline or solid
     'ejecuta' => '',
 ])
 

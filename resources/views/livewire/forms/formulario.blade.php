@@ -1,10 +1,15 @@
 <div>
   {{-- resources\views\livewire\forms\formulario.blade.php --}}
   <div class="flex justify-between">
-    <x-forms.tw_icons class="mr-2 mt-2 justify-start"
-                      name="table" />
-    <div>@livewire('forms.Search', ['search' => $search])</div>
+    <x-forms.tw_button class="ml-4 mt-2 h-8 w-8"
+                       ejecuta="resetFilters"
+                       icon="table"
+                       color="yellow">
+    </x-forms.tw_button>
+
+    <div>@livewire('forms.Search')</div>
     {{-- <div>{{ $search }}</div> --}}
+    <div>@livewire('forms.opcionesFiltro', ['titulo' => 'publicado'])</div>
     <x-forms.tw_button class="mb-1 mr-4 justify-self-stretch"
                        color="blue"
                        icon="plus"

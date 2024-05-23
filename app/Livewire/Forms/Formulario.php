@@ -56,7 +56,17 @@ class Formulario extends Component
     public $titulo,
         $abrir = false;
 
-    protected $listeners = ['seleccionActualizada', 'searchUpdated'];
+    protected $listeners = ['seleccionActualizada', 'searchUpdated', 'opcionUpdated'];
+
+    // isActive
+    public $opciones = 0;
+
+    public function opcionUpdated($opciones)
+    {
+        // dd($opciones);
+        $this->opciones = $opciones;
+        $this->filter();
+    }
 
     // Search
     public $search = '';
@@ -94,14 +104,9 @@ class Formulario extends Component
 
     public function filter()
     {
-        // Si $this->search está vacío, devolver todos los registros.
-        if (empty($this->search)) {
-            $this->filas = Post::orderBy($this->sortBy, $this->sortDirection)->get();
-            return;
-        }
-        $filter = '%' . $this->search . '%';
         $this->filas = Post::query()
-            ->when($this->search, function ($query) use ($filter) {
+            ->when($this->search, function ($query) {
+                $filter = '%' . $this->search . '%';
                 $query
                     ->where('id', 'like', $filter)
                     ->orWhere('title', 'like', $filter)
@@ -114,6 +119,12 @@ class Formulario extends Component
                         $query->where('name', 'like', $filter);
                     });
             })
+
+            ->when($this->opciones, function ($query) {
+                // dd(['opciones' => $this->opciones]);
+                $query->where('is_published', true);
+            })
+
             ->orderBy($this->sortBy, $this->sortDirection)
 
             ->get();
@@ -133,6 +144,15 @@ class Formulario extends Component
 
         // Aplica el filtro con el nuevo orden
         $this->filter();
+    }
+
+    public function resetFilters()
+    {
+        $this->search = '';
+        $this->opciones = false;
+        $this->filter();
+        // $this->emit('searchUpdated', $this->search);
+        // $this->emit('isActiveUpdated', $this->isPublishedFilter);
     }
 
     public function fncSave()

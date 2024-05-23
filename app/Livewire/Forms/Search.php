@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class Search extends Component
 {
@@ -20,5 +21,12 @@ class Search extends Component
     public function queBuscar()
     {
         $this->updatedSearch();
+    }
+
+    public function updating($attribute, $value)
+    {
+        if ($attribute === 'search' && Str::length($value) === 0) {
+            $this->updatedSearch();
+        }
     }
 }
