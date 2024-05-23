@@ -25,7 +25,8 @@
 
         @case('checkit')
           <div class="text-center">
-            {{ $valorCampo ? 'yes' : 'no' }}
+            <x-forms.tw_onoff :valor="$valorCampo"
+                              tipo="ticket-x" />
           </div>
         @break
 

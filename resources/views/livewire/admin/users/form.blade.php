@@ -8,7 +8,7 @@
     <h1>Realmente quiere eliminar este registro ??</h1>
   @endif --}}
 
-  <form wire:submit.prevent="{{ $accion == 1 ? 'store' : ($accion == 2 ? 'update' : 'delete') }}">
+  <form wire:submit="{{ $accion == 1 ? 'store' : ($accion == 2 ? 'update' : 'delete') }}">
     @csrf
     @method({{ $accion == 1 ? 'GET' : ($accion == 2 ? 'POST' : 'PUT') }})
     <div>

@@ -18,15 +18,15 @@
   <div class="rounded-md border border-b-2 border-l-2 border-blue-500 p-2 shadow-md shadow-blue-500">
     <table class="min-w-full table-auto"
            wire:poll.3000ms>
-      <thead>
+      <thead class="bg-gray-300 dark:bg-gray-700">
         <tr>
           @include('includes.titulos')
           <th class="px-4 py-1 text-center text-gray-900 dark:text-white">{{ __('Actions') }}</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($fields as $field)
-          <tr>
+        @foreach ($fields as $index => $field)
+          <tr class="{{ $loop->index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-300' }}">
             @include('includes.campos')
 
             <td class="px-4 py-1 text-center">

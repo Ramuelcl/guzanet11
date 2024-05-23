@@ -4,7 +4,7 @@
   </x-slot>
 
   <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-    <div class="border-b border-gray-200 p-6">
+    <div class="border-b border-gray-200">
       {{-- <x-forms.tw_button class="additional-class"
                          type="button"
                          color="blue"
@@ -13,7 +13,7 @@
       </x-forms.tw_button> --}}
       {{-- <x-forms.tw_icons name="archive"
                         typeIcon="solid" /> --}}
-      <div class="mb-4">
+      <div class="mb-1">
         @livewire('forms.mensajes')
       </div>
       @livewire('forms.formulario')

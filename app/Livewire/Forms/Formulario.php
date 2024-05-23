@@ -151,8 +151,8 @@ class Formulario extends Component
         $this->search = '';
         $this->opciones = false;
         $this->filter();
-        // $this->emit('searchUpdated', $this->search);
-        // $this->emit('isActiveUpdated', $this->isPublishedFilter);
+        // $this->dispatch('searchUpdated', $this->search);
+        // $this->dispatch('isActiveUpdated', $this->isPublishedFilter);
     }
 
     public function fncSave()

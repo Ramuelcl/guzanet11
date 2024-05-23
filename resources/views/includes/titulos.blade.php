@@ -8,7 +8,7 @@
   @endphp
   @if ($visible1)
     <th class="px-4 py-2 text-center text-gray-900 dark:text-white"
-        @if ($orderBy) wire:click="sortBy('{{ $campoNombre }}')" style="cursor: pointer;" @endif>
+        @if ($orderBy) wire:click.live="sortBy('{{ $campoNombre }}')" style="cursor: pointer;" @endif>
       <div class="flex items-center justify-center">
         <span>{{ $titulo1 }}</span>
         @if ($orderBy && $sortBy === $campoNombre)
