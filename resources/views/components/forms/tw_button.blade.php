@@ -39,7 +39,7 @@
   $buttonClass = $classFix . $colorClass . ' ' . $class;
 @endphp
 
-<button class="{{ $buttonClass }} {{ $slot->isEmpty() ? 'min-w-1 rounded-full' : 'min-w-20 rounded-md' }}"
+<button class="{{ $buttonClass }} {{ $slot->isEmpty() ? 'min-w-1 rounded-full' : 'min-w-20 max-h-10 mt-1 rounded-md' }}"
         id="{{ $name }}"
         name="{{ $name }}"
         type="{{ $type }}"

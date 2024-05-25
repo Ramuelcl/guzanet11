@@ -150,7 +150,7 @@ class Formulario extends Component
     public function resetFilters()
     {
         $this->search = '';
-        $this->opciones = false;
+        $this->opciones = 0;
         $this->filter();
         // $this->dispatch('searchUpdated', $this->search);
         // $this->dispatch('isActiveUpdated', $this->isPublishedFilter);

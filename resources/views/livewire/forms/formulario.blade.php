@@ -15,7 +15,7 @@
     {{-- <div>@livewire('forms.opcionesFiltro', ['titulo' => 'publicado', 'opcionArr' => $opcionArr])</div> --}}
     <div class="inline-flex">
       <label class="mr-2 mt-2"
-             for="opciones">filtre:</label>
+             for="opciones">Publicados:</label>
       <select class="form-input mt-1 block h-10 w-full rounded-md border-blue-400 font-normal text-blue-500 focus:border-blue-600 dark:text-blue-100"
               id="opciones"
               name="opciones"
