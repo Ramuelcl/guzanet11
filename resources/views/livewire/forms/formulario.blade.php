@@ -1,14 +1,15 @@
 <div>
   {{-- resources\views\livewire\forms\formulario.blade.php --}}
   <div class="flex justify-between">
-    <x-forms.tw_button class="ml-4 mt-2 h-8 w-8"
-                       ejecuta="resetFilters"
-                       icon="table"
-                       color="yellow">
-    </x-forms.tw_button>
-
-    <div>
-      @livewire('forms.Search')
+    <div class="inline-flex">
+      <x-forms.tw_button class="ml-4 mr-1 mt-2 h-8 w-8"
+                         ejecuta="resetFilters"
+                         icon="table"
+                         color="gray">
+      </x-forms.tw_button>
+      <div>
+        @livewire('forms.lwSearch')
+      </div>
     </div>
     {{-- <div>{{ $search }}</div> --}}
     <div>@livewire('forms.opcionesFiltro', ['titulo' => 'publicado'])</div>
@@ -27,8 +28,8 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($fields as $index => $field)
-          <tr class="{{ $loop->index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-300' }}">
+        @forelse ($fields as $index => $field)
+          <tr class="{{ $loop->index % 2 === 0 ? '' : 'bg-gray-200' }}">
             @include('includes.campos')
 
             <td class="px-4 py-1 text-center">
@@ -58,7 +59,9 @@
                   </x-forms.tw_button> --}}
             </td>
           </tr>
-        @endforeach
+        @empty
+          Not records
+        @endforelse
       </tbody>
     </table>
     {{-- {{ $fields->links() }} --}}
@@ -77,54 +80,41 @@
               {{-- @csrf --}}
               <div class="grid grid-cols-2 gap-2">
                 <div class="mb-4">
-                  <x-forms.input idName="title"
-                                 label="Título"
-                                 disabled="{{ $accion === 'eliminar' }}"
-                                 required
-                                 wire:model="title" />
+                  <x-forms.tw_input idName="title"
+                                    label="Título"
+                                    disabled="{{ $accion === 'eliminar' }}"
+                                    required
+                                    wire:model="title" />
                 </div>
                 <div class="mb-4">
-                  <x-forms.input idName="content"
-                                 type="textarea"
-                                 label="Descripción"
-                                 disabled="{{ $accion === 'eliminar' }}"
-                                 required
-                                 wire:model="content" />
+                  <x-forms.tw_input idName="content"
+                                    type="textarea"
+                                    label="Descripción"
+                                    required
+                                    disabled="{{ $accion === 'eliminar' }}"
+                                    wire:model="content" />
                 </div>
               </div>
               <div class="grid grid-cols-2 gap-2">
                 <div class="mb-4">
-                  <x-forms.input idName="categoryId"
-                                 type="select"
-                                 label="Categoría"
-                                 :options="$categories->pluck('name', 'id')"
-                                 :disabled="$accion === 'eliminar'"
-                                 wire:model="categoryId" />
-
+                  <x-forms.tw_input idName="categoryId"
+                                    type="select"
+                                    label="Categoría"
+                                    :options="$categories->pluck('name', 'id')"
+                                    :disabled="$accion === 'eliminar'"
+                                    wire:model="categoryId" />
                 </div>
                 <div class="mb-4">
                   <x-forms.label class="ml-4">Marcas</x-forms.label>
                   @livewire('forms.select2', [($opciones = $tags), ($seleccionadas = $selectedTags)])
-
-                  {{-- <ul class="grid grid-cols-1">
-                    @foreach ($tags as $tag)
-                      <li class="ml-4">
-                        <x-forms.input class="col-span-1 block"
-                                       id="{{ $tag->id }}"
-                                       type="checkbox"
-                                       value="{{ $tag->id }}"
-                                       label="{{ $tag->name }}"
-                                       disabled="{{ $accion === 'eliminar' }}"
-                                       wire:model="selectedTags"></x-forms.input>
-                      </li>
-                    @endforeach
-                  </ul> --}}
                 </div>
               </div>
           </div>
           <div class="mt-4 flex justify-end">
-            <x-secondary-button class="mr-2"
-                                wire:click="$set('abrir',false)">Cancelar</x-secondary-button>
+            <x-forms.tw_button class="mr-2"
+                               color="white"
+                               icon="reply"
+                               ejecuta="$set('abrir',false)">Cancelar</x-forms.tw_button>
             <x-primary-button type="submit"
                               wire:click="fncSave">{{ $accion == 'crear' ? 'Crear' : ($accion == 'editar' ? 'Actualizar' : 'Eliminar') }}</x-primary-button>
           </div>

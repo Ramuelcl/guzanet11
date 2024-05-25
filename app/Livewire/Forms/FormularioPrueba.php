@@ -10,7 +10,18 @@ class FormularioPrueba extends Component
     public $search = '';
     public $filas;
 
-    protected $listeners = ['searchUpdated' => 'filter'];
+    public function resetSearch()
+    {
+        $this->searchUpdated();
+        $this->dispatch('searchReset');
+    }
+
+    protected $listeners = ['searchUpdated'];
+    public function searchUpdated($search = '')
+    {
+        $this->search = $search;
+        $this->filter();
+    }
 
     public function mount()
     {
@@ -22,11 +33,6 @@ class FormularioPrueba extends Component
         return view('livewire.forms.formulario-prueba', [
             'fields' => $this->filas,
         ]);
-    }
-
-    public function updatedSearch()
-    {
-        $this->filter();
     }
 
     public function filter()

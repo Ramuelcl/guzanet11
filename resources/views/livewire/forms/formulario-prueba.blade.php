@@ -1,13 +1,18 @@
 <div>
   {{-- resources\views\livewire\forms\formulario-prueba.blade.php --}}
   <div>
+    <x-forms.tw_button color="yellow"
+                       ejecuta="resetSearch()">Reset</x-forms.tw_button>
+    componente Padre: {{ $search }}<br>
     <input class="my-5"
+           type="search"
+           value="{{ $search }}"
            wire:model.live="search">
-    componente Padre: {{ $search }}
     <hr>
     <div class="flex items-center space-x-4">
-      <livewire:forms.search-prueba wire:model="search" />
+      <livewire:forms.lwsearch wire:model="search" />
     </div>
+
   </div>
   <table class="min-w-full divide-y divide-gray-200">
     <thead>
