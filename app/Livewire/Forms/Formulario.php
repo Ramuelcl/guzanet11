@@ -60,6 +60,7 @@ class Formulario extends Component
 
     // isActive
     public $opciones = 0;
+    public $opcionArr = [['name' => 'Publicado', 'id=1'], ['name' => '-', 'id=0']];
 
     public function opcionUpdated($opciones)
     {
@@ -99,7 +100,7 @@ class Formulario extends Component
         $campos = config('PostCampos');
         $this->filter();
         // dump($this->filas);
-        return view('livewire.forms.formulario', ['fields' => $this->filas, 'categories' => $this->categories, 'tags' => $this->tags, 'campos' => $campos]);
+        return view('livewire.forms.formulario', ['fields' => $this->filas, 'categories' => $this->categories, 'tags' => $this->tags, 'campos' => $campos, 'opcionArr' => $this->opcionArr]);
     }
 
     public function filter()

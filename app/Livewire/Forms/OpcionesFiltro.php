@@ -22,7 +22,7 @@ class OpcionesFiltro extends Component
         $this->opciones = 0;
     }
 
-    public function mount($titulo = null)
+    public function mount($titulo = null, $opcionArr = [])
     {
         if (!is_null($titulo)) {
             $this->titulo = $titulo;
