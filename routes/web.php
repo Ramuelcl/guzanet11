@@ -24,6 +24,8 @@ Route::controller(principalController::class)
         // route::post('/contacto', 'contacto')->name('contacto.enviar');
 
         // route::get('/direcciones', 'direcciones')->name('direcciones');
+
+        // Route::get('/search', Search::class)->name('search');
     });
 
 Route::prefix('admin')
@@ -37,8 +39,6 @@ Route::get('/dashboard', function () {
 })
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
-
-Route::get('/search', Search::class)->name('search');
 
 Route::middleware('auth')->group(function () {
     // Route::get('/dashboard/users', [UserController::class, 'index'])->name('users.index');

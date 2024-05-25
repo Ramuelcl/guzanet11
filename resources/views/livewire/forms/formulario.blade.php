@@ -7,7 +7,9 @@
                        color="yellow">
     </x-forms.tw_button>
 
-    <div>@livewire('forms.Search')</div>
+    <div>
+      @livewire('forms.Search')
+    </div>
     {{-- <div>{{ $search }}</div> --}}
     <div>@livewire('forms.opcionesFiltro', ['titulo' => 'publicado'])</div>
     <x-forms.tw_button class="mb-1 mr-4 justify-self-stretch"
