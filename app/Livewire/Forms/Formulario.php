@@ -130,9 +130,9 @@ class Formulario extends Component
             ->get();
     }
 
-    public function sortBy($field)
+    public function fncSortBy($field)
     {
-        dd('sortBy called', $field); // Agrega esta línea para depurar
+        // dd('sortBy called', $field); // Agrega esta línea para depurar
         // Cambia el campo de ordenamiento si ya se está ordenando por el mismo campo
         if ($this->sortBy === $field) {
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';

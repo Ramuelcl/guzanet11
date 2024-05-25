@@ -28,6 +28,8 @@
           'font-medium bg-black-600 dark:bg-black-400 text-black-100 dark:text-black-800 hover:bg-black-400 dark:hover:bg-black-200 active:bg-black-400 dark:active:bg-black-200 focus:ring-black-700 dark:focus:ring-black-500 disabled:bg-black-300 dark:disabled:bg-black-200 disabled:cursor-not-allowed',
       'white' =>
           'font-medium bg-gray-50 dark:bg-gray-50 text-gray-800 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-50 active:bg-gray-50 dark:active:bg-gray-50 focus:ring-gray-50 dark:focus:ring-gray-50 disabled:bg-gray-50 dark:disabled:bg-gray-50 disabled:cursor-not-allowed',
+      'transparent' =>
+          'font-medium bg-transparent text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 active:bg-gray-300 dark:active:bg-gray-700 focus:ring-gray-500 dark:focus:ring-gray-400 disabled:bg-transparent disabled:cursor-not-allowed',
   ];
   $defaultColor = 'gray'; // Definir un color por defecto
 

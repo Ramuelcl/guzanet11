@@ -11,31 +11,18 @@
       @if ($orderBy)
         <th class="px-4 py-2 text-center text-black dark:text-white"
             style="cursor: pointer;"
-            wire:click="sortBy('{{ $campoNombre }}')">
+            wire:click="fncSortBy('{{ $campoNombre }}')">
         @else
         <th class="px-4 py-2 text-center text-black dark:text-white">
       @endif
       <div class="flex items-center justify-center">
-        <span wire:click="sortBy('{{ $campoNombre }}')">{{ $titulo1 }}</span>
-        {{-- <th class="px-4 py-2 text-center text-black dark:text-white"
-          @if ($orderBy) wire:click="sortBy('{{ $campoNombre }}')" style="cursor: pointer;" @endif>
         <div class="flex items-center justify-center">
           <span>{{ $titulo1 }}</span>
-
-      <th class="cursor-pointer"
-          wire:click="fncOrden('{{ $field['name'] }}')"
-          scope="col">
-        <div class="flex items-center">
-          {{ __($field['table']['titre']) }}
-          <x-sort-icon campo="{{ $field['name'] }}"
-                       :sortDir="$sortDir"
-                       :sortField="$sortField" /> --}}
-
-
-        @if ($orderBy && $sortBy === $campoNombre)
-          {{-- Mostrar el icono de orden ascendente o descendente según la dirección --}}
-          <x-forms.tw_icons :name="$sortDirection === 'asc' ? 'arrow-circle-up' : 'arrow-circle-down'" />
-        @endif
+          @if ($orderBy && $sortBy === $campoNombre)
+            {{-- Mostrar el icono de orden ascendente o descendente según la dirección --}}
+            <x-forms.tw_icons :name="$sortDirection === 'asc' ? 'arrow-circle-up' : 'arrow-circle-down'" />
+          @endif
+        </div>
       </div>
       </th>
     @endif

@@ -29,7 +29,7 @@
       </thead>
       <tbody>
         @forelse ($fields as $index => $field)
-          <tr class="{{ $loop->index % 2 === 0 ? '' : 'bg-gray-200' }}">
+          <tr class="{{ $loop->index % 2 === 0 ? '' : 'bg-gray-100' }}">
             @include('includes.campos')
 
             <td class="px-4 py-1 text-center">
@@ -43,7 +43,7 @@
               {{-- <button wire:click="btnEditar({{ $field->id }})">{{ __('Edit') }}</button> --}}
               <x-forms.tw_button ejecuta="btnEditar({{ $field->id }})"
                                  icon="pencil"
-                                 color="green">
+                                 color="transparent">
               </x-forms.tw_button>
 
               {{-- borrar un registro --}}
