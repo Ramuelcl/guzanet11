@@ -115,8 +115,9 @@
                                color="white"
                                icon="reply"
                                ejecuta="$set('abrir',false)">Cancelar</x-forms.tw_button>
-            <x-primary-button type="submit"
-                              wire:click="fncSave">{{ $accion == 'crear' ? 'Crear' : ($accion == 'editar' ? 'Actualizar' : 'Eliminar') }}</x-primary-button>
+            <x-forms.tw_button type="submit"
+                               icon="save"
+                               ejecuta="fncSave">{{ $accion == 'crear' ? 'Crear' : ($accion == 'editar' ? 'Actualizar' : 'Eliminar') }}</x-forms.tw_button>
           </div>
           </form>
       </div>
