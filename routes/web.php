@@ -20,6 +20,7 @@ Route::controller(principalController::class)
         // route::get('/porDefinir', 'porDefinir')->name('porDefinir');
         // route::get('/todo', 'todo')->name('todo');
         route::get('/acercade', 'acercade')->name('acercade');
+        route::get('/prueba', 'prueba')->name('prueba');
         // route::get('/contacto', 'contacto')->name('contacto');
         // route::post('/contacto', 'contacto')->name('contacto.enviar');
 

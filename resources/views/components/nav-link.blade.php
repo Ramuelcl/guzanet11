@@ -1,12 +1,13 @@
 @props(['active'])
 
 @php
-    $classes = ($active ?? false)
-                ? 'flex items-center mt-4 py-2 px-6 bg-gray-700 bg-opacity-25 text-gray-100'
-                : 'flex items-center mt-4 py-2 px-6 text-gray-100';
+  $classes =
+      $active ?? false
+          ? 'flex items-center mt-4 py-2 px-6 text-blue-500 border-b border-blue-500 '
+          : 'flex items-center mt-4 py-2 px-6 text-blue-500';
 @endphp
 
 <a {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $icon ?? '' }}
-    <span class="mx-3">{{ $slot }}</span>
+  {{ $icon ?? '' }}
+  <span class="mx-3">{{ $slot }}</span>
 </a>

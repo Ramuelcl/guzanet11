@@ -11,6 +11,10 @@ class PrincipalController extends Controller
     {
         return view('principal.acercaDe');
     }
+    public function prueba()
+    {
+        return view('principal.prueba');
+    }
 
     public function iconos($typeIcon = 'solid')
     {
