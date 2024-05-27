@@ -27,7 +27,8 @@
   <nav class="mt-10"
        x-data="{ isMultiLevelMenuOpen: false }">
     <x-nav-link href="{{ route('dashboard') }}"
-                :active="request()->routeIs('dashboard')">
+                :active="request()->routeIs('dashboard')"
+                wire:navigate>
       <x-slot name="icon">
         <svg class="h-6 w-6"
              xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +49,8 @@
     </x-nav-link>
 
     <x-nav-link href="{{ route('users') }}"
-                :active="request()->routeIs('users')">
+                :active="request()->routeIs('users')"
+                wire:navigate>
       <x-slot name="icon">
         <svg class="h-5 w-5"
              fill="none"
@@ -65,8 +67,9 @@
       {{ __('Users') }}
     </x-nav-link>
 
-    <x-nav-link href="{{ route('about') }}"
-                :active="request()->routeIs('about')">
+    <x-nav-link href="{{ route('acercade') }}"
+                :active="request()->routeIs('acercaDe')"
+                wire:navigate>
       <x-slot name="icon">
         <svg class="h-5 w-5"
              aria-hidden="true"
@@ -81,11 +84,12 @@
           </path>
         </svg>
       </x-slot>
-      {{ __('About us') }}
+      {{ __('Acerca de...') }}
     </x-nav-link>
 
     <x-nav-link href="{{ route('iconos') }}"
-                :active="request()->routeIs('iconos')">
+                :active="request()->routeIs('iconos')"
+                wire:navigate>
       <x-slot name="icon">
         <svg class="h-5 w-5"
              aria-hidden="true"

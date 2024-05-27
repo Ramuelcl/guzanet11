@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PrincipalController extends Controller
 {
+    public function acercaDe()
+    {
+        return view('principal.acercaDe');
+    }
+
     public function iconos($typeIcon = 'solid')
     {
         $directory = public_path("images/app/icons/$typeIcon"); // Asegúrate de que esta ruta es correcta

@@ -5,7 +5,7 @@
       // Obtén el valor del campo actual
       $titulo1 = $campoInfo['titulo1'];
       $visible1 = $campoInfo['visible1'];
-      $orderBy = $campoInfo['orderBy']; // Nuevo: Obtén la configuración de orderBy
+      $orderBy = isset($campoInfo['orderBy']) ?? $campoInfo['orderBy']; // Nuevo: Obtén la configuración de orderBy
     @endphp
     @if ($visible1)
       @if ($orderBy)

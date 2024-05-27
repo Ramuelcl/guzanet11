@@ -2,6 +2,9 @@
   {{-- resources\views\livewire\forms\formulario.blade.php --}}
   <div class="flex justify-between">
     <div class="inline-flex">
+      <x-forms.tw_button icon="reply"
+                         ejecuta="redirigir">ir a Acerca de
+      </x-forms.tw_button>
       <x-forms.tw_button class="ml-4 mr-1 mt-2 h-8 w-8"
                          ejecuta="resetFilters"
                          icon="table"
@@ -14,7 +17,7 @@
     {{-- <div>{{ $search }}</div> --}}
     {{-- <div>@livewire('forms.opcionesFiltro', ['titulo' => 'publicado', 'opcionArr' => $opcionArr])</div> --}}
     <div class="inline-flex">
-      <label class="mr-2 mt-2"
+      <label class="mr-2 mt-3"
              for="opciones">Publicados:</label>
       <select class="form-input mt-1 block h-10 w-full rounded-md border-blue-400 font-normal text-blue-500 focus:border-blue-600 dark:text-blue-100"
               id="opciones"
@@ -118,7 +121,7 @@
                 </div>
                 <div class="mb-4">
                   <x-forms.label class="ml-4">Marcas</x-forms.label>
-                  @livewire('forms.select2', [($opciones = $tags), ($seleccionadas = $selectedTags)])
+                  @livewire('forms.select2', [($opciones = $tags), ($seleccionadas = $selectedTags)], key('select01'))
                 </div>
               </div>
           </div>

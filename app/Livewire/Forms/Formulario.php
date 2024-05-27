@@ -83,6 +83,12 @@ class Formulario extends Component
         $this->selectedTags = $seleccionadas;
     }
 
+    public function redirigir()
+    {
+        // dd('llegó a PrincipalController');
+        $this->redirect('/acercade', navigate: false);
+    }
+
     public function mount()
     {
         $this->reset();

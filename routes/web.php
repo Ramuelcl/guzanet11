@@ -19,7 +19,7 @@ Route::controller(principalController::class)
         // route::get('/testInput', 'testInput')->name('testInput');
         // route::get('/porDefinir', 'porDefinir')->name('porDefinir');
         // route::get('/todo', 'todo')->name('todo');
-        // route::get('/acercade', 'acercade')->name('acercade');
+        route::get('/acercade', 'acercade')->name('acercade');
         // route::get('/contacto', 'contacto')->name('contacto');
         // route::post('/contacto', 'contacto')->name('contacto.enviar');
 
