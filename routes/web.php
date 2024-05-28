@@ -27,6 +27,8 @@ Route::controller(principalController::class)
         // route::get('/direcciones', 'direcciones')->name('direcciones');
 
         // Route::get('/search', Search::class)->name('search');
+        Route::get('/linkStorage', 'linkStorage')->name('linkStorage');
+        Route::get('/readStorage', 'readStorage')->name('readStorage');
     });
 
 Route::prefix('admin')

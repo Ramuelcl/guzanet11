@@ -6,9 +6,8 @@
   <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
     <div class="border-b border-gray-200">
 
-      {{-- @livewire('forms.formularioPrueba') --}}
-      {{-- @livewire('forms.formulario' lazy) --}}
-      <livewire:forms.formulario lazy />
+      @livewire('forms.formulario')
+      {{-- <livewire:forms.formulario lazy /> --}}
 
     </div>
   </div>

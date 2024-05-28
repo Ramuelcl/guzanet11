@@ -4,12 +4,14 @@
 namespace App\Livewire\Forms;
 
 use Livewire\Component;
+use Livewire\Attributes\Lazy;
 use Illuminate\Support\Str;
 //
 use App\Models\backend\Category;
 use App\Models\backend\Tag;
 use App\Models\post\Post;
 
+#[lazy]
 class Formulario extends Component
 {
     public $filas;
