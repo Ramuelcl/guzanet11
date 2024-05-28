@@ -76,7 +76,7 @@ return [
         'visible1' => false,
         // ingreso
         'titulo2' => 'Imagen',
-        'visible2' => false,
+        'visible2' => true,
         // tipo de campo
         'tipo' => 'image',
         'filter' => false,

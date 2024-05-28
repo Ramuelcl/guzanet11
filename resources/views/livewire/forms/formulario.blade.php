@@ -77,38 +77,50 @@
           titulo="{{ $titulo }} {{ $post_id == 0 ? '' : ' - ' . $post_id }}">
           <div class="mt-0 rounded-md border border-l-2 border-t-2 border-blue-500 p-2 shadow-md shadow-blue-500">
 
-            <form wire:submit="fncSave({{ $accion == 'crear' ? null : $post_id }})">
+            <form enctype="multipart/form-data>
               {{-- @csrf --}}
-              <div class="grid grid-cols-2 gap-2">
-                <div class="mb-4">
-                  <x-forms.tw_input disabled="{{ $accion === 'eliminar' }}" idName="title" label="Título" required
-                    wire:model="title" />
-                </div>
-                <div class="mb-4">
-                  <x-forms.tw_input disabled="{{ $accion === 'eliminar' }}" idName="content" label="Descripción"
-                    required type="textarea" wire:model="content" />
-                </div>
+              <div class="grid
+              gap-2" grid-cols-2 wire:submit="fncSave({{ $accion == 'crear' ? null : $post_id }})">
+              <div class="mb-4">
+                <x-forms.tw_input disabled="{{ $accion === 'eliminar' }}" idName="title" label="Título" required
+                  wire:model="title" />
               </div>
-              <div class="grid grid-cols-2 gap-2">
-                <div class="mb-4">
-                  <x-forms.tw_input :disabled="$accion === 'eliminar'" :options="$categories->pluck('name', 'id')" idName="categoryId" label="Categoría"
-                    type="select" wire:model="categoryId" />
-                </div>
-                <div class="mb-4">
-                  <x-forms.label class="ml-4">Marcas</x-forms.label>
-                  @livewire('forms.select2', [($opciones = $tags), ($seleccionadas = $selectedTags)], key('select01'))
-                </div>
+              <div class="mb-4">
+                <x-forms.tw_input disabled="{{ $accion === 'eliminar' }}" idName="content" label="Descripción" required
+                  type="textarea" wire:model="content" />
               </div>
           </div>
-          <div class="mt-4 flex justify-end">
-            <x-forms.tw_button class="mr-2" color="white" ejecuta="$set('abrir',false)"
-              icon="reply">Cancelar</x-forms.tw_button>
-            <x-forms.tw_button ejecuta="fncSave" icon="save"
-              type="submit">{{ $accion == 'crear' ? 'Crear' : ($accion == 'editar' ? 'Actualizar' : 'Eliminar') }}</x-forms.tw_button>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="mb-4">
+              <x-forms.tw_input :disabled="$accion === 'eliminar'" :options="$categories->pluck('name', 'id')" idName="categoryId" label="Categoría" type="select"
+                wire:model="categoryId" />
+            </div>
+            <div class="mb-4">
+              <x-forms.label class="ml-4">Marcas</x-forms.label>
+              @livewire('forms.select2', [($opciones = $tags), ($seleccionadas = $selectedTags)], key('select01'))
+            </div>
           </div>
-          </form>
+          <div class="mb-4 grid grid-cols-2 gap-2">
+            <div>
+              <x-forms.tw_input :disabled="$accion === 'eliminar'" idName="image_path" label="Imagen" type="file"
+                wire:key="{{ $image_key }}" wire:model="image_path" />
+            </div>
+            <div>
+              @if ($image_path)
+                <img alt="img" class="w-24" src="{{ $temporaryUrl }}">
+              @endif
+            </div>
+          </div>
       </div>
-      </x-forms.tw_ventana>
+      <div class="mt-4 flex justify-end">
+        <x-forms.tw_button class="mr-2" color="white" ejecuta="$set('abrir',false)"
+          icon="reply">Cancelar</x-forms.tw_button>
+        <x-forms.tw_button ejecuta="fncSave" icon="save"
+          type="submit">{{ $accion == 'crear' ? 'Crear' : ($accion == 'editar' ? 'Actualizar' : 'Eliminar') }}</x-forms.tw_button>
+      </div>
+      </form>
     </div>
-  @endif
+    </x-forms.tw_ventana>
+</div>
+@endif
 </div>

@@ -5,6 +5,7 @@ namespace App\Livewire\Forms;
 
 use Livewire\Component;
 use Livewire\Attributes\Lazy;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 //
 use App\Models\backend\Category;
@@ -14,6 +15,8 @@ use App\Models\post\Post;
 #[lazy]
 class Formulario extends Component
 {
+    use WithFileUploads;
+
     public $filas;
     public $categories;
     public $tags;
@@ -23,6 +26,8 @@ class Formulario extends Component
     public $title = '';
     public $content = '';
     public $image_path = null;
+    public $image_key = null;
+    public $temporaryUrl = null;
     public $is_published = false;
     public $categoryId = '';
     public $selectedTags = [];
@@ -185,11 +190,16 @@ class Formulario extends Component
         //     'rules' => $this->rules(),
         // ]);
 
-        $paso = $this->validate($this->rules(), $this->messages, ['categoryId' => 'categoriia', 'content' => 'contenidoo']);
+        $paso = $this->validate($this->rules(), $this->messages, ['categoryId' => 'categoria', 'content' => 'contenido']);
         // dd('fncSave', 'Validation passed', $paso);
 
         // Generar el nuevo slug
         $nuevoSlug = $this->generarSlug($this->title);
+
+        $imagen = null;
+        if ($this->image_path) {
+            $imagen = $this->image_path->store('images/posts', 'public');
+        }
         if ($this->accion == 'crear') {
             // CREATE
             // Crear el nuevo registro
@@ -197,7 +207,7 @@ class Formulario extends Component
                 'title' => $this->title,
                 'slug' => $nuevoSlug,
                 'content' => $this->content,
-                'image_path' => $this->image_path,
+                'image_path' => $imagen,
                 'is_published' => $this->is_published,
                 'category_id' => $this->categoryId,
             ]);
@@ -253,6 +263,7 @@ class Formulario extends Component
         $this->reset('post_id', 'title', 'content', 'image_path', 'is_published', 'categoryId', 'selectedTags');
         $this->fncCerrar();
         $this->mount();
+        $this->image_key = rand();
 
         $this->dispatch('mensaje-nuevo', [$tipo, $mensaje]);
 
@@ -265,6 +276,7 @@ class Formulario extends Component
             'title' => 'required|min:3|unique:posts,title,' . $this->post_id,
             // 'slug' => 'required|unique:posts,slug,' . $this->post_id,
             'content' => 'required|min:5',
+            'image_path' => 'image|nullable|mimes:jpeg,png,jpg,gif|max:2048',
             'categoryId' => 'required|exists:categories,id',
             'selectedTags' => 'array|exists:tags,id',
         ];
@@ -303,10 +315,19 @@ class Formulario extends Component
         $this->validateOnly($propertyName, $this->rules());
     }
     // antes de hacer el cambio
-    // public function updating($property, $value)
-    // {
-    //     dump($property, $value);
-    // }
+    public function updating($property, $value)
+    {
+        if ($property === 'image_path') {
+            // $this->validateOnly($property, [
+            //     'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validación de la imagen
+            // ]);
+
+            if ($value) {
+                $this->temporaryUrl = $value->temporaryUrl();
+            }
+        }
+        // dump($property, $value);
+    }
 
     public function btnCrear()
     {
