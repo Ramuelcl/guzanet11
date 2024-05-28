@@ -100,6 +100,16 @@ class Formulario extends Component
         $this->filter();
     }
 
+    public function placeholder()
+    {
+        return view('livewire.placeholders.skeleton');
+        // return <<<'HTML'
+        //     <div class="bg-neutral-500 text-center">
+        //         <p class="text-2xl font-extrabold text-blue-600">Cargando...</p>
+        //     </div>
+        // HTML;
+    }
+
     public function render()
     {
         // Accede a las configuraciones
