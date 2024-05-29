@@ -25,8 +25,7 @@
 
         @case('checkit')
           <div class="text-center">
-            <x-forms.tw_onoff :valor="$valorCampo"
-                              tipo="ticket-x" />
+            <x-forms.tw_onoff :valor="$valorCampo" tipo="ticket-x" />
           </div>
         @break
 
@@ -57,9 +56,8 @@
 
         @case('image')
           <div class="h-10 w-10 text-center">
-            @if (Storage::disk('public')->exists($valorCampo))
-              <img src="{{ asset('storage/' . $valorCampo) }}"
-                   alt="Foto">
+            @if (!is_null($valorCampo) && Storage::disk('public')->exists($valorCampo))
+              <img alt="Foto" src="{{ asset('storage/' . $valorCampo) }}">
             @endif
 
           </div>

@@ -276,7 +276,9 @@ class Formulario extends Component
             'title' => 'required|min:3|unique:posts,title,' . $this->post_id,
             // 'slug' => 'required|unique:posts,slug,' . $this->post_id,
             'content' => 'required|min:5',
-            'image_path' => 'image|nullable|mimes:jpeg,png,jpg,gif|max:2048',
+            'image_path' => 'string|nullable|mimes:jpeg,png,jpg,gif|max:2048',
+            // ['attachment' => ['required', File::types(['mp3', 'wav'])->min(1024)->max(12 * 1024), ],]
+            // ['photo' => ['required',File::image()->min(1024)->max(12 * 1024)->dimensions(Rule::dimensions()->maxWidth(1000)->maxHeight(500)),],]
             'categoryId' => 'required|exists:categories,id',
             'selectedTags' => 'array|exists:tags,id',
         ];

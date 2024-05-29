@@ -106,8 +106,9 @@
                 wire:key="{{ $image_key }}" wire:model="image_path" />
             </div>
             <div>
-              @if ($image_path)
-                <img alt="img" class="w-24" src="{{ $temporaryUrl }}">
+              {{-- @dump($image_path) --}}
+              @if (!is_null($image_path) && Storage::disk('public')->exists($image_path))
+                <img alt="Foto" class="w-24" src="{{ asset('storage/' . $image_path) }}">
               @endif
             </div>
           </div>

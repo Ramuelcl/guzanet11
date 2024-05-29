@@ -73,7 +73,7 @@ return [
     'image_path' => [
         // lista
         'titulo1' => 'Imagen',
-        'visible1' => false,
+        'visible1' => true,
         // ingreso
         'titulo2' => 'Imagen',
         'visible2' => true,
