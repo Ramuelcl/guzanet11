@@ -13,6 +13,11 @@ class PrincipalController extends Controller
         return view('principal.acercaDe');
     }
 
+    public function prueba()
+    {
+        return view('principal.prueba');
+    }
+
     public function iconos($typeIcon = 'solid')
     {
         $directory = public_path("images/app/icons/$typeIcon"); // Asegúrate de que esta ruta es correcta
