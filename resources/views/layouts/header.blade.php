@@ -24,8 +24,8 @@
             </x-nav-link>
           </div>
           <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-            <x-nav-link :active="request()->routeIs('prueba')" :href="route('prueba')" wire:navigate.hover>
-              {{ __('Prueba') }}
+            <x-nav-link :active="request()->routeIs('todo')" :href="route('todo')" wire:navigate.hover>
+              {{ __('todo') }}
             </x-nav-link>
           </div>
           {{-- THEME TOGGLER --}}

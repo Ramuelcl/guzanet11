@@ -1,38 +1,26 @@
 <!DOCTYPE html>
-<html :class="{ 'theme-dark': dark }"
-      x-data="data()"
-      lang="{{ str_replace('_', '-', config('guzanet.idioma')) }}">
+<html :class="{ 'theme-dark': dark }" lang="{{ str_replace('_', '-', config('guzanet.idioma')) }}"
+  x-data="data()">
 
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible"
-        content="ie=edge">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
-  <meta name="author"
-        content="Ramuel Gonzalez">
-  <meta name="description"
-        content="Laravel 11">
-  <meta name="csrf-token"
-        content="{{ csrf_token() }}">
+  <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Ramuel Gonzalez" name="author">
+  <meta content="Laravel 11" name="description">
+  <meta content="{{ csrf_token() }}" name="csrf-token">
 
-  <title>{{ config('guzanet.aplicacion', 'Laravel') }}</title>
+  <title>{{ config('guzanet.aplicacion', 'Guz@net') }}</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   @livewireStyles
-
-  <script src="//unpkg.com/alpinejs"
-          defer></script>
-
 </head>
 
 <body>
-  <div class="font-roboto flex h-screen bg-slate-200"
-       x-data="{ sidebarOpen: false }">
+  <div class="font-roboto flex h-screen bg-slate-200" x-data="{ sidebarOpen: false }">
     @include('layouts.navigation')
 
     <div class="flex flex-1 flex-col overflow-hidden">
@@ -46,16 +34,13 @@
               {{ $header }}
             </h3>
           @endif
-
+          {{-- USADO --}}
           {{ $slot }}
         </div>
       </main>
     </div>
   </div>
-  <script src="{{ 'resources/js/init-alpine.js' }}"></script>
-  <script rel="script"
-          type="text/javascript"
-          src="resources/js/mod-dark.js"></script>
+
   @stack('modals')
   @livewireScripts
   @stack('js')

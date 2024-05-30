@@ -13,9 +13,9 @@ class PrincipalController extends Controller
         return view('principal.acercaDe');
     }
 
-    public function prueba()
+    public function todo()
     {
-        return view('principal.prueba');
+        return view('principal.todo');
     }
 
     public function iconos($typeIcon = 'solid')
