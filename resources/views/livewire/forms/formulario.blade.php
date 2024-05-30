@@ -2,9 +2,9 @@
   {{-- resources\views\livewire\forms\formulario.blade.php --}}
   <div class="flex justify-between">
     <div class="inline-flex">
-      @persist('player')
+      {{-- @persist('player')
         <audio controls src="{{ asset('audios/Abba - Chiquitita.mp3') }}"></audio>
-      @endpersist
+      @endpersist --}}
       <x-forms.tw_button class="ml-4 mr-1 mt-2 h-8 w-8" color="gray" ejecuta="resetFilters" icon="table">
       </x-forms.tw_button>
       <div>
