@@ -37,7 +37,7 @@ return [
         // tipo de campo
         'tipo' => 'mail',
         // restricciones de campo
-        'rules' => 'required|email|unique:users,email,' . Auth::id(),
+        'rules' => 'required|email|unique:users,email,', //. Auth::id(), agregarlo cuando se carga
         // 'rules' => 'required|email|unique:users,email,' . Auth::id() . '|max:255|regex:/(.+)@(.+)\.[a-z]{2,}/',
         'messages' => [
             'required' => 'El campo email es obligatorio.',
