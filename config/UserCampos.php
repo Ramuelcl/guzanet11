@@ -37,7 +37,8 @@ return [
         'visible2' => true,
         // tipo de campo
         'tipo' => 'mail',
-    ],
+ // restricciones de campo
+'rules' => 'required|email|unique:users,email,' . Auth::id(),
 
     'password' => [
         // lista
@@ -48,7 +49,9 @@ return [
         'visible2' => true,
         // tipo de campo
         'tipo' => 'password',
-    ],
+ // restricciones de campo
+'crear'=>'password|required|min:1|max:100|unique:users',
+'editar'=>'password|required|min:1|max:100|unique:users',   ],
 
     'profile_photo_path' => [
         // lista
@@ -59,7 +62,13 @@ return [
         'visible2' => true,
         // tipo de campo
         'tipo' => 'image',
-    ],
+// restricciones de campo
+'rules' => 'required|max:2048|mimetypes:image/jpg,image/png,image/jpeg', // foto
+// 'rules' => 'required|max:10240|mimetypes:video/mp4,video/avi,video/webm', // video
+
+'crear'=>'file|min:1|max:100|unique:users',
+'editar'=>'file|min:1|max:100|unique:users',// restricciones de campo
+   ],
 
     'is_active' => [
         // lista
