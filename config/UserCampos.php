@@ -23,6 +23,9 @@ return [
         'visible2' => true,
         // tipo de campo
         'tipo' => 'string',
+// restricciones de campo
+'crear'=>'string|required|min:1|max:100|unique:users',
+'editar'=>'string|required|min:1|max:100|unique:users',
     ],
 
     'email' => [
