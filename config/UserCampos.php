@@ -24,8 +24,7 @@ return [
         // tipo de campo
         'tipo' => 'string',
 // restricciones de campo
-'crear'=>'string|required|min:1|max:100|unique:users',
-'editar'=>'string|required|min:1|max:100|unique:users',
+'rules'=>'string|required|min:1|max:100|unique:users',
     ],
 
     'email' => [
@@ -78,9 +77,6 @@ $messages = [
 // restricciones de campo
 'rules' => 'required|max:2048|mimetypes:image/jpg,image/png,image/jpeg', // foto
 // 'rules' => 'required|max:10240|mimetypes:video/mp4,video/avi,video/webm', // video
-
-'crear'=>'file|min:1|max:100|unique:users',
-'editar'=>'file|min:1|max:100|unique:users',// restricciones de campo
    ],
 
     'is_active' => [
