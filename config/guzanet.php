@@ -3,15 +3,27 @@
 // config/guzanet.php
 return [
     'clave' => 'valor',
+'appEmpresa'=>'Guzanet',
 'appLogo'=>'images/app/guzanet.png',
 'appNombre' => 'Ramuel',
 'appMail' => 'Ramuelcl@gmail.com',
-'appEmpresa'=>'Guzanet',
+
     'idioma' => 'es-CL',
     'icon_paths' => [
         'solid' => 'images/app/icons/solid',
         'outline' => 'images/app/icons/outline',
     ],
+'appThemes'=>[
+        'colores' => [
+            'azul',
+            'verde', 
+            'amarillo', 
+            'rojo',
+            ],
+        'fondo' => 'images/app/fondo.png',
+    ],
+'appTheme'=>'theme01',
+
 ];
 
 /**
