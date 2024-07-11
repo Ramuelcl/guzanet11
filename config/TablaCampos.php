@@ -12,6 +12,10 @@ return [
         // tipo de campo
         'tipo' => 'integer',
         'decimal' => 0,
+// restricciones de campo
+'crear'=>'integer|required|min:1|max:100',
+'editar'=>'integer|required|min:1|max:100',
+
     ],
 
     'tabla_id' => [
