@@ -5,7 +5,7 @@ return [
     'clave' => 'valor',
 'appEmpresa'=>'Guzanet',
 'appLogo'=>'images/app/guzanet.png',
-'appNombre' => 'Ramuel',
+'appNombre' => 'Ramuel Gonzalez',
 'appMail' => 'Ramuelcl@gmail.com',
 
     'idioma' => 'es-CL',
