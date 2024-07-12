@@ -25,7 +25,12 @@ return [
         'tipo' => 'string',
         // restricciones de campo
         'rules' => 'string|required|min:1|max:100|unique:users',
-    ],
+         'messages' => [
+            'required.attributes.name' => 'El campo :attribute es obligatorio.',
+    'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
+    'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
+    'max.attributes.name' => 'El campo :attribute debe tener como máximo 255 caracteres.',
+        ],   ],
 
     'email' => [
         // lista
