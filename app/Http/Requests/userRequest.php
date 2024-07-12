@@ -11,7 +11,7 @@ class userRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,32 @@ class userRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+                $rules = [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'password' => 'nullable|string|min:8'
+                ->when($this->password, [
+                    'required',
+                    Password::min(8)
+                        ->letters()
+                        ->numbers()
+                        ->symbols(),
+                    'confirmed',
+                ]),
+            'profile_photo_path' => 'nullable|file|image|max:2048',
+            'is_active' => 'required|boolean',
         ];
+
+        if ($this->method() === 'POST') {
+            // Es una creación de usuario
+            $rules['email'] .= '|unique:users,email';
+            $rules['password'] .= '|required';
+        } else {
+            // Es una edición de usuario
+            $rules['email'] .= '|unique:users,email,'.$this->userId; // Excluir el usuario actual de la validación de unicidad
+        }
+
+        return $rules;
+
     }
 }
