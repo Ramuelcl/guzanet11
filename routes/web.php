@@ -21,8 +21,8 @@ Route::controller(principalController::class)
         // route::get('/todo', 'todo')->name('todo');
         route::get('/acercade', 'acercade')->name('acercade');
         route::get('/todo', 'todo')->name('todo');
-        // route::get('/contacto', 'contacto')->name('contacto');
-        // route::post('/contacto', 'contacto')->name('contacto.enviar');
+        route::get('/contacto', 'contacto')->name('contacto');
+        route::post('/contacto', 'contacto')->name('contacto.enviar');
 
         // route::get('/direcciones', 'direcciones')->name('direcciones');
 

@@ -1,8 +1,8 @@
-<x-layouts.layout01 titulo="- Contactez nous">
-  <x-slot name="header">
-    {{ __('Contactez nous') }}
-  </x-slot>
+<x-app-layout>
+  <div class="flex content-between justify-between">
+    <h2 class="font-extrabold">{{ __('Contacto') }}</h2>
 
+  </div>
   <x-modal name="contactus"
            title="Contact Us Modal">
     <x-slot:body>
@@ -52,4 +52,4 @@
           x-data
           @click="$dispatch('open-modal',{name:'contactus'})"> Modal 2 </button>
 
-</x-layouts.layout01>
+</x-app-layout>

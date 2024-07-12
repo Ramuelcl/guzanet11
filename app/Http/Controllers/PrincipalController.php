@@ -13,6 +13,16 @@ class PrincipalController extends Controller
         return view('principal.acercaDe');
     }
 
+    public function contacto()
+    {
+        return view('principal.contacto');
+    }
+
+    public function enviar()
+    {
+        return view('principal.acercaDe');
+    }
+
     public function todo()
     {
         return view('principal.todo');

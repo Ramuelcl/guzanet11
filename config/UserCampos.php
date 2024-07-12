@@ -24,13 +24,14 @@ return [
         // tipo de campo
         'tipo' => 'string',
         // restricciones de campo
-        'rules' => 'string|required|min:1|max:100|unique:users',
-         'messages' => [
+        'rules' => 'required|string|min:3|max:128',
+        'messages' => [
             'required.attributes.name' => 'El campo :attribute es obligatorio.',
-    'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
-    'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
-    'max.attributes.name' => 'El campo :attribute debe tener como máximo 255 caracteres.',
-        ],   ],
+            'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
+            'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
+            'max.attributes.name' => 'El campo :attribute debe tener como máximo 100 caracteres.',
+        ],
+    ],
 
     'email' => [
         // lista
@@ -42,14 +43,15 @@ return [
         // tipo de campo
         'tipo' => 'mail',
         // restricciones de campo
-        'rules' => 'required|email|unique:users,email,', //. Auth::id(), agregarlo cuando se carga
+        'rules' => 'required|email|min:6|max:128|unique:users,email,', //. Auth::id(), agregarlo cuando se carga
         // 'rules' => 'required|email|unique:users,email,' . Auth::id() . '|max:255|regex:/(.+)@(.+)\.[a-z]{2,}/',
         'messages' => [
-            'required' => 'El campo email es obligatorio.',
-            'email' => 'Introduce una dirección de correo electrónico válida.',
-            'unique' => 'El email ya está en uso.',
-            'max' => 'El email no puede superar los 255 caracteres.',
-            'regex' => 'El formato del email no es válido.',
+            'required.attributes.email' => 'El campo :attribute es obligatorio.',
+            'email.attributes.email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
+            'unique.attributes.email' => 'El email ya está en uso.',
+            'min.attributes.email' => 'El campo :attribute debe tener al menos 6 caracteres.',
+            'max.attributes.email' => 'El campo :attribute debe tener como máximo 128 caracteres.',
+            'regex.attributes.email' => 'El formato del email no es válido.',
         ],
     ],
 
@@ -64,7 +66,7 @@ return [
         'tipo' => 'password',
         // restricciones de campo
         'rules' => [
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6|max:128|confirmed',
             'password_confirmation' => 'required',
             // 'password' => 'required|min:8|regex:/[a-z]+[A-Z]+[0-9]+[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/',
             'messages' => [
