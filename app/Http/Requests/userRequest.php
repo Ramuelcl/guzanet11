@@ -74,8 +74,8 @@ public function attributes()
         return [
             'required.attributes.name' => 'El campo :attribute es obligatorio.',
             'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
-            'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
-            'max.attributes.name' => 'El campo :attribute debe tener como máximo 255 caracteres.',
+            'min.attributes.name' => "El campo :attribute debe tener al menos $nmeMin caracteres.",
+            'max.attributes.name' => "El campo :attribute debe tener como máximo $nmeMax caracteres.",
             //
            'required.attributes.name' => 'El campo :attribute es obligatorio.',
             'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
