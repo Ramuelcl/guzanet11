@@ -64,7 +64,7 @@ public function attributes()
             'name' => __('Name'),
             'email' => __('eMail'),
             'password' => __('Password'),
-'profile_photo_path'=>__('photo'),
+'profile_photo_path'=>__('Photo'),
 'is_active' => __('Active'),
         ];
     }
@@ -76,7 +76,22 @@ public function attributes()
             'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
             'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
             'max.attributes.name' => 'El campo :attribute debe tener como máximo 255 caracteres.',
-            // ... mensajes personalizados para otros campos y reglas
+            //
+           'required.attributes.name' => 'El campo :attribute es obligatorio.',
+            'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
+            'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
+            'max.attributes.name' => 'El campo :attribute debe tener como máximo 255 caracteres.',
+            //
+             'required.attributes.name' => 'El campo :attribute es obligatorio.',
+            'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
+            'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
+            'max.attributes.name' => 'El campo :attribute debe tener como máximo 255 caracteres.',
+            //
+            'required.attributes.name' => 'El campo :attribute es obligatorio.',
+            'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
+            'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
+            'max.attributes.name' => 'El campo :attribute debe tener como máximo 255 caracteres.',
+            //
         ];
     }
 }
