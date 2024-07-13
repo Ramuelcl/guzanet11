@@ -33,14 +33,14 @@ public $pswRgx = config('guzanet.pswRgx',0); // 0=false, 1=false
             'name' => "required|string|min:$nmeMin|max:$nmeMax",
             'email' => 'required|email',
             'password' => 'nullable|string|min:$pswMin'.$pswRgx ? '|regex:/[a-z]+[A-Z]+[0-9]+[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/' : '', // Validación adicional para mayúsculas, minúsculas, números y caracteres especiales
-                ->when($this->password, [
-                    'required',
-                    Password::min(6)
-                        ->letters($pswLet)
-                        ->numbers($pswNum)
-                        ->symbols($pswSim),
-                    'confirmed',
-                ]),
+           //     ->when($this->password, [
+             //       'required',
+        //            Password::min(6)
+          //              ->letters($pswLet)
+         //               ->numbers($pswNum)
+          //              ->symbols($pswSim),
+          //          'confirmed',
+          //      ]),
 'password_confirmation' => 'required|same:password',
             'profile_photo_path' => 'nullable|file|image|max:2048',
             'is_active' => 'required|boolean',
