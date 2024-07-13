@@ -70,7 +70,10 @@ return [
             'password_confirmation' => 'required',
             // 'password' => 'required|min:8|regex:/[a-z]+[A-Z]+[0-9]+[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/',
             'messages' => [
-                'regex' => 'La contraseña debe contener al menos una minúscula, una mayúscula, un número y un carácter especial.',
+                'regex.attributes.password' => 'La contraseña debe contener al menos una minúscula, una mayúscula, un número y un carácter especial.',
+                'min.attributes.password' => 'El campo :attribute debe tener al menos 6 caracteres.',
+                'max.attributes.password' => 'El campo :attribute debe tener como máximo 128 caracteres.',
+                'password_confirmation.attributes.password' => 'El campo password no son los mismos.',
             ],
         ],
     ],
