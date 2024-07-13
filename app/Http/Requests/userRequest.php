@@ -49,4 +49,24 @@ class userRequest extends FormRequest
         return $rules;
 
     }
+public function attributes()
+    {
+        return [
+            'name' => 'Nombre completo',
+            'email' => 'Correo electrónico',
+            'password' => 'Contraseña',
+'profile_photo_path'=>__('photo'),
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required.attributes.name' => 'El campo :attribute es obligatorio.',
+            'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
+            'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
+            'max.attributes.name' => 'El campo :attribute debe tener como máximo 255 caracteres.',
+            // ... mensajes personalizados para otros campos y reglas
+        ];
+    }
 }
