@@ -21,17 +21,23 @@ class userRequest extends FormRequest
      */
     public function rules(): array
     {
+public $nmeMin = config('guzanet.nmeMin',6);
+public $nmeMax = config('guzanet.nmeMax',255);
 public $pswMin = config('guzanet.pswMin',6);
+public $pswLet = config('guzanet.pswLet',0);
+public $pswNum = config('guzanet.pswNum',0);
+public $pswSim = config('guzanet.pswSim',0);
+
                 $rules = [
-            'name' => "required|string|min:$pswMin|max:255",
+            'name' => "required|string|min:$nmeMin|max:$nmeMax",
             'email' => 'required|email',
-            'password' => 'nullable|string|min:8'
+            'password' => 'nullable|string|min:$pswMin'
                 ->when($this->password, [
                     'required',
                     Password::min(6)
-                        ->letters(1)
-                        ->numbers(1)
-                        ->symbols(1),
+                        ->letters($pswLet)
+                        ->numbers($pswNum)
+                        ->symbols($pswSim),
                     'confirmed',
                 ]),
             'profile_photo_path' => 'nullable|file|image|max:2048',
