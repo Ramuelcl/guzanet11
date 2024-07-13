@@ -77,12 +77,12 @@ public function attributes()
             'min.attributes.name' => "El campo :attribute debe tener al menos $nmeMin caracteres.",
             'max.attributes.name' => "El campo :attribute debe tener como máximo $nmeMax caracteres.",
             //
-           'required.attributes.name' => 'El campo :attribute es obligatorio.',
-            'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
-            'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
-            'max.attributes.name' => 'El campo :attribute debe tener como máximo 255 caracteres.',
+           'required.attributes.email' => 'El campo :attribute es obligatorio.',
+            'email.attributes.email' => 'El campo :attribute debe ser un mail válido.',
+   //         'min.attributes.email' => 'El campo :attribute debe tener al menos $ caracteres.',
+     //       'max.attributes.email' => 'El campo :attribute debe tener como máximo 255 caracteres.',
             //
-             'required.attributes.name' => 'El campo :attribute es obligatorio.',
+             'required.attributes.password' => 'El campo :attribute es obligatorio.',
             'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
             'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
             'max.attributes.name' => 'El campo :attribute debe tener como máximo 255 caracteres.',
