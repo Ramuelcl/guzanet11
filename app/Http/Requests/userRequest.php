@@ -31,7 +31,7 @@ public $pswSim = config('guzanet.pswSim',0);
                 $rules = [
             'name' => "required|string|min:$nmeMin|max:$nmeMax",
             'email' => 'required|email',
-            'password' => 'nullable|string|min:$pswMin'
+            'password' => 'nullable|string|min:$pswMin|regex:/[a-z]+[A-Z]+[0-9]+[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/', // Validación adicional para mayúsculas, minúsculas, números y caracteres especiales
                 ->when($this->password, [
                     'required',
                     Password::min(6)
