@@ -21,16 +21,17 @@ class userRequest extends FormRequest
      */
     public function rules(): array
     {
+public $pswMin = config('guzanet.pswMin',6);
                 $rules = [
-            'name' => 'required|string|max:255',
+            'name' => "required|string|min:$pswMin|max:255",
             'email' => 'required|email',
             'password' => 'nullable|string|min:8'
                 ->when($this->password, [
                     'required',
-                    Password::min(8)
-                        ->letters()
-                        ->numbers()
-                        ->symbols(),
+                    Password::min(6)
+                        ->letters(1)
+                        ->numbers(1)
+                        ->symbols(1),
                     'confirmed',
                 ]),
             'profile_photo_path' => 'nullable|file|image|max:2048',
@@ -52,10 +53,11 @@ class userRequest extends FormRequest
 public function attributes()
     {
         return [
-            'name' => 'Nombre completo',
-            'email' => 'Correo electrónico',
-            'password' => 'Contraseña',
+            'name' => __('Name'),
+            'email' => __('eMail'),
+            'password' => __('Password'),
 'profile_photo_path'=>__('photo'),
+'is_active' => __('Active'),
         ];
     }
 
