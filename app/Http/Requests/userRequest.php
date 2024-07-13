@@ -40,6 +40,7 @@ public $pswSim = config('guzanet.pswSim',0);
                         ->symbols($pswSim),
                     'confirmed',
                 ]),
+'password_confirmation' => 'required|same:password',
             'profile_photo_path' => 'nullable|file|image|max:2048',
             'is_active' => 'required|boolean',
         ];
