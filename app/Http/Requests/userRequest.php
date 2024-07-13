@@ -27,11 +27,12 @@ public $pswMin = config('guzanet.pswMin',6);
 public $pswLet = config('guzanet.pswLet',0);
 public $pswNum = config('guzanet.pswNum',0);
 public $pswSim = config('guzanet.pswSim',0);
+public $pswRgx = config('guzanet.pswRgx',0); // 0=false, 1=false
 
                 $rules = [
             'name' => "required|string|min:$nmeMin|max:$nmeMax",
             'email' => 'required|email',
-            'password' => 'nullable|string|min:$pswMin|regex:/[a-z]+[A-Z]+[0-9]+[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/', // Validación adicional para mayúsculas, minúsculas, números y caracteres especiales
+            'password' => 'nullable|string|min:$pswMin'.$pswRgx ? '|regex:/[a-z]+[A-Z]+[0-9]+[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/' : '', // Validación adicional para mayúsculas, minúsculas, números y caracteres especiales
                 ->when($this->password, [
                     'required',
                     Password::min(6)
