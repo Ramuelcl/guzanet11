@@ -1,5 +1,5 @@
 <?php
-// UserCampos.php
+// config/UserCampos.php
 
 return [
     'id' => [
