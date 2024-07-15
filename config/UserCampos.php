@@ -23,15 +23,7 @@ return [
         'visible2' => true,
         // tipo de campo
         'tipo' => 'string',
-        // restricciones de campo
-        'rules' => 'required|string|min:3|max:128',
-        'messages' => [
-            'required.attributes.name' => 'El campo :attribute es obligatorio.',
-            'string.attributes.name' => 'El campo :attribute debe ser una cadena de texto.',
-            'min.attributes.name' => 'El campo :attribute debe tener al menos 3 caracteres.',
-            'max.attributes.name' => 'El campo :attribute debe tener como máximo 100 caracteres.',
-        ],
-    ],
+            ],
 
     'email' => [
         // lista
@@ -42,18 +34,7 @@ return [
         'visible2' => true,
         // tipo de campo
         'tipo' => 'mail',
-        // restricciones de campo
-        'rules' => 'required|email|min:6|max:128|unique:users,email,', //. Auth::id(), agregarlo cuando se carga
-        // 'rules' => 'required|email|unique:users,email,' . Auth::id() . '|max:255|regex:/(.+)@(.+)\.[a-z]{2,}/',
-        'messages' => [
-            'required.attributes.email' => 'El campo :attribute es obligatorio.',
-            'email.attributes.email' => 'El campo :attribute debe ser una dirección de correo electrónico válida.',
-            'unique.attributes.email' => 'El email ya está en uso.',
-            'min.attributes.email' => 'El campo :attribute debe tener al menos 6 caracteres.',
-            'max.attributes.email' => 'El campo :attribute debe tener como máximo 128 caracteres.',
-            'regex.attributes.email' => 'El formato del email no es válido.',
-        ],
-    ],
+            ],
 
     'password' => [
         // lista
@@ -64,19 +45,7 @@ return [
         'visible2' => true,
         // tipo de campo
         'tipo' => 'password',
-        // restricciones de campo
-        'rules' => [
-            'password' => 'required|min:6|max:128|confirmed',
-            'password_confirmation' => 'required',
-            // 'password' => 'required|min:8|regex:/[a-z]+[A-Z]+[0-9]+[@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/',
-            'messages' => [
-                'regex.attributes.password' => 'La contraseña debe contener al menos una minúscula, una mayúscula, un número y un carácter especial.',
-                'min.attributes.password' => 'El campo :attribute debe tener al menos 6 caracteres.',
-                'max.attributes.password' => 'El campo :attribute debe tener como máximo 128 caracteres.',
-                'password_confirmation.attributes.password' => 'El campo password no son los mismos.',
             ],
-        ],
-    ],
 
     'profile_photo_path' => [
         // lista
@@ -87,10 +56,7 @@ return [
         'visible2' => true,
         // tipo de campo
         'tipo' => 'image',
-        // restricciones de campo
-        'rules' => 'required|max:2048|mimetypes:image/jpg,image/png,image/jpeg', // foto
-        // 'rules' => 'required|max:10240|mimetypes:video/mp4,video/avi,video/webm', // video
-    ],
+           ],
 
     'is_active' => [
         // lista
