@@ -34,6 +34,7 @@ class userRequest extends FormRequest
     {
         $rules = [
             "name" => "required|string|min:$this->nmeMin|max:$this->nmeMax",
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
             "email" => "required|email|min:$this->emlMin|min:$this->emlMin",
             "password" => "", // "required|string|min:$this->pswMin|max:$this->pswMax",
             "password_confirmation" => "required|same:password",
